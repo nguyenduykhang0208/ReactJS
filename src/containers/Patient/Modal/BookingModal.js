@@ -196,6 +196,7 @@ class BookingModal extends Component {
                                 onChange={(event) => { this.handleOnChangeInput(event, 'email') }}
                                 value={this.state.email}
                                 className='form-control my-1'
+                                required={true}
                             />
                         </div>
                         <div className='col-6 form-group'>

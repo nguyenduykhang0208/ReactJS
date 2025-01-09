@@ -70,7 +70,7 @@ class Specialty extends Component {
     getDataDetailSpecialty = () => {
 
     }
-    hanldeOnChangeSelect = async (event) => {
+    handleOnChangeSelect = async (event) => {
         if (this.props.match?.params?.id) {
             let id = this.props.match.params.id;
             let location = event.target.value;
@@ -90,7 +90,6 @@ class Specialty extends Component {
                         })
                     }
                 }
-
                 this.setState({
                     detail_specialty: res.data,
                     doctorId_list: doctorId_list
@@ -115,7 +114,7 @@ class Specialty extends Component {
                     <div className='specialty_doctor_wrap' >
                         <div className='search-specialty_doctor'>
                             <div className='col-4 my-3'>
-                                <select className='form-select' onChange={(event) => this.hanldeOnChangeSelect(event)}>
+                                <select className='form-select' onChange={(event) => this.handleOnChangeSelect(event)}>
                                     {listProvince && listProvince.length > 0 && listProvince.map((item, index) => {
                                         return (
                                             <option key={index} value={item.keyMap}>{language === LANGUAGES.VI ? item.value_vi : item.value_en}</option>

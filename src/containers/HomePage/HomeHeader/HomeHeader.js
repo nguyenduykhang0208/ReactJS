@@ -4,7 +4,7 @@ import './HomeHeader.scss';
 import { FormattedMessage } from 'react-intl';
 import { LANGUAGES } from '../../../utils'
 import { changeLanguageApp } from '../../../store/actions/appActions';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter, Link, NavLink } from 'react-router-dom';
 import * as actions from "../../../store/actions";
 
 class HomeHeader extends Component {
@@ -50,11 +50,11 @@ class HomeHeader extends Component {
                         <div className='left-content'>
                             <div className='header-logo' onClick={() => this.redirectToHome()}></div>
                             <ul className='header-navbar'>
-                                <li><Link to="/home"><FormattedMessage id='home-header.home' /></Link></li>
-                                <li><Link to="/all-doctors"><FormattedMessage id='home-header.doctor' /></Link></li>
-                                <li><Link to="/all-clinics"><FormattedMessage id='home-header.clinic' /></Link></li>
-                                <li><Link to="/all-specialty"><FormattedMessage id='home-header.specialty' /></Link></li>
-                                <li><Link to="/news"><FormattedMessage id='home-header.news' /></Link></li>
+                                <li><NavLink to="/home" activeClassName="active-link"><FormattedMessage id='home-header.home' /></NavLink></li>
+                                <li><NavLink to="/all-doctors" activeClassName="active-link"><FormattedMessage id='home-header.doctor' /></NavLink></li>
+                                <li><NavLink to="/all-clinics" activeClassName="active-link"><FormattedMessage id='home-header.clinic' /></NavLink></li>
+                                <li><NavLink to="/all-specialty" activeClassName="active-link"><FormattedMessage id='home-header.specialty' /></NavLink></li>
+                                <li><NavLink to="/news" activeClassName="active-link"><FormattedMessage id='home-header.news' /></NavLink></li>
                             </ul>
                         </div>
                         {/* <div className='center-content'>

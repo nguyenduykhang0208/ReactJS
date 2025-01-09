@@ -8,7 +8,8 @@ class allClinic extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            clinic_list: []
+            clinic_list: [],
+            keyToSearch: '',
         }
     }
     async componentDidMount() {
@@ -18,6 +19,17 @@ class allClinic extends Component {
                 clinic_list: res.data
             })
         }
+    }
+
+    handleOnChangeInput = (event, id) => {
+        let copyState = { ...this.state };
+        copyState[id] = event.target.value;
+        this.setState({
+            ...copyState
+        }, () => {
+            let { currentPage, perPage, position, keyToSearch, provinceId } = this.state
+            this.getAllDataDoctor(currentPage, perPage, keyToSearch, position, provinceId);
+        })
     }
 
     componentDidUpdate(prevProps, preState) {

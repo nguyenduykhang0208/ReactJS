@@ -27,6 +27,12 @@
                 cursor: pointer;
             }
 
+            .header-navbar .active-link {
+                color: $white-color;
+                border-radius: 5px;
+                background: $primary-color;
+            }
+
             .header-navbar {
                 display: flex;
                 align-items: center;

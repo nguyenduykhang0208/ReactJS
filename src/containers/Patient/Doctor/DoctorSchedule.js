@@ -139,7 +139,7 @@ class DoctorSchedule extends Component {
                                         {doctor_schedules.map((item, index) => {
                                             let timeType = language === LANGUAGES.VI ? item.timeTypeData.value_vi : item.timeTypeData.value_en
                                             return (
-                                                <button className='my-btn btn-schedule' key={index} onClick={() => this.handleClickSchedule(item)}>{timeType}</button>
+                                                <button className='my-btn btn-schedule' key={index} onClick={() => this.handleClickSchedule(item)} disabled={item.isDisable}>{timeType}</button>
                                             )
                                         })}
                                     </div>

@@ -29,15 +29,38 @@ class ManageSchedule extends Component {
     componentDidUpdate(prevProps, preState) {
         if (prevProps.doctors !== this.props.doctors) {
             let inputDataSelect = this.doctorsDataForSelect(this.props.doctors);
-            this.setState({
-                arrDoctors: inputDataSelect
-            })
+            let { user } = this.props;
+            let selectedOption = inputDataSelect.find(doctor => doctor.value === user.id);
+            if (selectedOption) {
+                this.setState({
+                    arrDoctors: inputDataSelect,
+                    selectedDoctor: selectedOption
+                })
+            }
+            else {
+                this.setState({
+                    arrDoctors: inputDataSelect,
+                    selectedDoctor: inputDataSelect && inputDataSelect.length > 0 ? inputDataSelect[0] : ''
+                })
+            }
+
         }
         if (prevProps.language !== this.props.language) {
             let inputDataSelect = this.doctorsDataForSelect(this.props.doctors);
-            this.setState({
-                arrDoctors: inputDataSelect
-            })
+            let { user } = this.props;
+            let selectedOption = inputDataSelect.find(doctor => doctor.value === user.id);
+            if (selectedOption) {
+                this.setState({
+                    arrDoctors: inputDataSelect,
+                    selectedDoctor: selectedOption
+                })
+            }
+            else {
+                this.setState({
+                    arrDoctors: inputDataSelect,
+                    selectedDoctor: inputDataSelect && inputDataSelect.length > 0 ? inputDataSelect[0] : ''
+                })
+            }
         }
         if (prevProps.working_hours !== this.props.working_hours) {
             let data = this.props.working_hours;
@@ -73,6 +96,7 @@ class ManageSchedule extends Component {
     }
 
     handleOnChangeDatePicker = (date) => {
+        console.log(date)
         this.setState({
             selectedDate: date[0]
         })
@@ -124,7 +148,7 @@ class ManageSchedule extends Component {
         }
     }
     render() {
-        const { language } = this.props;
+        const { language, user } = this.props;
         let schedule_time = this.state.working_hours;
         let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
         return (
@@ -141,6 +165,7 @@ class ManageSchedule extends Component {
                             value={this.state.selectedDoctor}
                             onChange={this.handleChange}
                             options={this.state.arrDoctors}
+                            isDisabled={user.roleId === 'R2'}
                         />
                     </div>
                     <div className='col-6'>
@@ -187,7 +212,8 @@ const mapStateToProps = state => {
         isLoggedIn: state.user.isLoggedIn,
         doctors: state.admin.doctors,
         language: state.app.language,
-        working_hours: state.admin.working_hours
+        working_hours: state.admin.working_hours,
+        user: state.admin.adminInfo
     };
 };
 

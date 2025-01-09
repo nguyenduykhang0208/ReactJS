@@ -25,7 +25,8 @@ class createInvoice extends Component {
             listInvoice: [],
             list_status: [],
             selectedDate: moment(new Date()).add(0, 'days').startOf('day').valueOf(),
-            isOpenModal: false
+            isOpenModal: false,
+            is_doctor_login: ''
         }
     }
 
@@ -48,13 +49,9 @@ class createInvoice extends Component {
         return data;
     }
 
-    handleChange = async (selectedOption) => {
-        this.setState({ selectedOption })
-        await this.props.getDetailDoctorStart(selectedOption.value);
-    }
+
 
     getAllInvoiceData = async (doctorId) => {
-        let { user } = this.props;
         let { selectedDate, selectedStatus } = this.state;
         let to_date = new Date(selectedDate).getTime();
 
@@ -69,6 +66,12 @@ class createInvoice extends Component {
             })
         }
     }
+
+    handleChange = async (selectedOption) => {
+        this.setState({ selectedOption })
+        await this.getAllInvoiceData(selectedOption.value);
+    }
+
     async componentDidMount() {
         this.props.fetchAllDoctors();
         let res = await getAllCodeService('STATUS');
@@ -81,6 +84,9 @@ class createInvoice extends Component {
         }
         let { user } = this.props;
         if (user.roleId === 'R2') {
+            this.setState({
+                is_doctor_login: true
+            })
             await this.getAllInvoiceData(user.id);
         }
         else {
@@ -107,25 +113,33 @@ class createInvoice extends Component {
                 });
             }
         }
+        if (prevProps.language !== this.props.language) {
+            let inputDataSelect = this.setDataForSelect(this.props.doctors, 'USERS');
+            let { user } = this.props;
+            let selectedOption = inputDataSelect.find(doctor => doctor.value === user.id);
+            if (selectedOption) {
+                this.setState({
+                    arrDoctors: inputDataSelect,
+                    selectedOption: selectedOption
+                })
+            }
+            else {
+                this.setState({
+                    arrDoctors: inputDataSelect,
+                    selectedOption: inputDataSelect && inputDataSelect.length > 0 ? inputDataSelect[0] : ''
+                })
+            }
+        }
     }
 
 
     handleOnChangeDatePicker = (date) => {
-        let { user } = this.props;
+        let { selectedOption } = this.state;
         this.setState({
             selectedDate: date[0]
         }, async () => {
-            await this.getAllInvoiceData();
+            await this.getAllInvoiceData(selectedOption.value);
         })
-    }
-
-    handleOnChangeInput = (event, name) => {
-        let copyState = { ...this.state };
-        copyState[name] = event.target.value;
-        this.setState({
-            ...copyState
-        })
-
     }
 
     handleOnChangeStatus = (event, id) => {
@@ -172,6 +186,7 @@ class createInvoice extends Component {
                                     onChange={this.handleChange}
                                     options={this.state.arrDoctors}
                                     placeholder={<FormattedMessage id='admin.manage-doctor.select-doctor' />}
+                                    isDisabled={this.state.is_doctor_login}
                                 />
                             </div>
                             <div className='col-6 form-group'>
@@ -219,36 +234,34 @@ class createInvoice extends Component {
                                             let patientName = `${item?.patientInvoiceData?.User?.lastName} ${item?.patientInvoiceData?.User?.firstName}`
                                             let doctorName = `${item?.doctorInvoiceData?.User?.lastName} ${item?.doctorInvoiceData?.User?.firstName}`
                                             return (
-                                                <>
-                                                    <tr key={index}>
-                                                        <td>{item.id}</td>
-                                                        <td>{patientName}</td>
-                                                        <td>
-                                                            {doctorName}
-                                                        </td>
-                                                        <td>
-                                                            <NumberFormat
-                                                                value={item.price}
-                                                                displayType='text'
-                                                                thousandSeparator
-                                                            />
-                                                        </td>
-                                                        <td>
-                                                            {item?.statusInvoiceData?.value_vi}
-                                                        </td>
-                                                        <td>
-                                                            {selectedStatus === 'S5' ?
-                                                                <>
-                                                                    <button className='my-btn btn-warning mx-3' onClick={() => this.openEditInvoiceModal(item)}>Sửa</button>
-                                                                    <button className='my-btn btn-primary' onClick={() => this.viewDetailInvoice(item)}>Xem chi tiết</button>
-                                                                </>
-                                                                :
+                                                <tr key={index}>
+                                                    <td>{item.id}</td>
+                                                    <td>{patientName}</td>
+                                                    <td>
+                                                        {doctorName}
+                                                    </td>
+                                                    <td>
+                                                        <NumberFormat
+                                                            value={item.price}
+                                                            displayType='text'
+                                                            thousandSeparator
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        {item?.statusInvoiceData?.value_vi}
+                                                    </td>
+                                                    <td>
+                                                        {selectedStatus === 'S5' ?
+                                                            <>
+                                                                <button className='my-btn btn-warning mx-3' onClick={() => this.openEditInvoiceModal(item)}>Sửa</button>
                                                                 <button className='my-btn btn-primary' onClick={() => this.viewDetailInvoice(item)}>Xem chi tiết</button>
+                                                            </>
+                                                            :
+                                                            <button className='my-btn btn-primary' onClick={() => this.viewDetailInvoice(item)}>Xem chi tiết</button>
 
-                                                            }
-                                                        </td>
-                                                    </tr>
-                                                </>
+                                                        }
+                                                    </td>
+                                                </tr>
                                             )
                                         })
                                     }

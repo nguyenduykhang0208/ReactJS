@@ -11,7 +11,7 @@ import ReactPaginate from 'react-paginate';
 import DatePicker from '../../../../components/Input/DatePicker';
 import TableManageMedicine from './TableManageMedicine';
 import NumberFormat from 'react-number-format';
-
+import moment from 'moment';
 class ManageMedicine extends Component {
 
     constructor(props) {
@@ -197,14 +197,17 @@ class ManageMedicine extends Component {
     handleSaveMedicine = async () => {
         let isValid = this.checkValidateInput();
         if (isValid === false) return;
+
         else {
+            let production_date = moment(this.state.production_date).startOf('day').format('YYYY-MM-DD HH:mm:ss');
+            let expire = moment(this.state.expire).startOf('day').format('YYYY-MM-DD HH:mm:ss');
             let action = this.state.action;
             if (action === manageActions.CREATE) {
                 let res = await createMedicine({
                     name: this.state.name,
                     price: this.state.price,
-                    expire: this.state.expire,
-                    production_date: this.state.production_date,
+                    expire: expire,
+                    production_date: production_date,
                     description: this.state.description,
                     quantity: this.state.quantity,
                     image: this.state.image
@@ -233,8 +236,8 @@ class ManageMedicine extends Component {
                     id: this.state.medicineEditId,
                     name: this.state.name,
                     price: this.state.price,
-                    expire: this.state.expire,
-                    production_date: this.state.production_date,
+                    expire: expire,
+                    production_date: production_date,
                     quantity: this.state.quantity,
                     description: this.state.description,
                     image: this.state.image
@@ -283,13 +286,14 @@ class ManageMedicine extends Component {
     }
 
     handleEditMedicine = async (medicine) => {
-
+        let production_date = moment(medicine.production_date, 'YYYY-MM-DD HH:mm:ss').toDate();
+        let expire = moment(medicine.expire, 'YYYY-MM-DD HH:mm:ss').toDate();
         this.setState({
             medicineEditId: medicine.id,
             name: medicine.name,
             price: medicine.price,
-            expire: medicine.expire,
-            production_date: medicine.production_date,
+            expire: expire,
+            production_date: production_date,
             description: medicine.description,
             quantity: medicine.quantity,
             image: '',
@@ -302,6 +306,11 @@ class ManageMedicine extends Component {
     handleOnChangeDatePicker = (date, id) => {
         let copyState = { ...this.state };
         copyState[id] = date[0];
+
+        if (id === 'expire' && this.state.production_date && date[0] <= this.state.production_date) {
+            alert('Ngày hết hạn phải lớn hơn ngày sản xuất.');
+            return; // Không cập nhật nếu điều kiện không thỏa mãn
+        }
         this.setState({
             ...copyState
         })
@@ -310,6 +319,8 @@ class ManageMedicine extends Component {
         let language = this.props.language;
         let { currentPage, perPage, totalPages } = this.state
         let { name, expire, production_date, price, quantity, image, description } = this.state;
+        let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+        console.log(yesterday)
         return (
             <div className='user-container'>
                 <div className='title'>
@@ -370,7 +381,7 @@ class ManageMedicine extends Component {
                                     onChange={(date) => this.handleOnChangeDatePicker(date, 'expire')}
                                     className='form-control'
                                     value={this.state.expire}
-                                    minDate={this.state.production_date}
+                                    minDate={yesterday}
                                 />
                             </div>
 

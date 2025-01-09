@@ -31,8 +31,8 @@ const getAllDoctors = () => {
     return axios.get(`api/get-all-doctors`)
 }
 
-const getAllDoctorsMore = () => {
-    return axios.get(`/api/get-all-doctors-with-more`)
+const getAllDoctorsMore = (data) => {
+    return axios.get(`/api/get-all-doctors-with-more?page=${data.page}&perPage=${data.perPage}&keyToSearch=${data.keyToSearch}&positionId=${data.positionId}&provinceId=${data.provinceId}`)
 }
 
 const saveDetailDoctorService = (data) => {

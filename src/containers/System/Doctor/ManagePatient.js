@@ -10,6 +10,8 @@ import { toast } from 'react-toastify';
 import LoadingOverlay from 'react-loading-overlay';
 import ConfirmModal from '../../../components/ConfirmModal';
 import * as actions from '../../../store/actions'
+import Select from 'react-select';
+import { FormattedMessage } from 'react-intl';
 
 class ManagePatient extends Component {
     constructor(props) {
@@ -21,17 +23,37 @@ class ManagePatient extends Component {
             dataModal: {},
             isShowLoading: false,
             status_booking: [],
-            selectedStatus: ''
+            selectedStatus: '',
+            arrDoctors: [],
+            selectedOption: '',
+            is_doctor_login: ''
         }
     }
 
-    getAllPatientData = async () => {
-        let { user } = this.props;
+    setDataForSelect = (inputData, type) => {
+        let data = [];
+        let language = this.props.language;
+        if (inputData && inputData.length > 0) {
+            if (type === 'USERS') {
+                inputData.map((item, index) => {
+                    let object = {};
+                    let label_vi = `${item.lastName} ${item.firstName}`;
+                    let label_en = `${item.firstName} ${item.lastName}`;
+                    object.label = language === LANGUAGES.VI ? label_vi : label_en;
+                    object.value = item.id;
+                    data.push(object);
+                })
+            }
+        }
+        return data;
+    }
+
+    getAllPatientData = async (doctorId) => {
         let { selectedDate, selectedStatus } = this.state;
         let to_date = new Date(selectedDate).getTime();
 
         let res = await getAllPatient({
-            doctorId: user.id,
+            doctorId: doctorId,
             date: to_date,
             statusId: selectedStatus
         })
@@ -43,6 +65,7 @@ class ManagePatient extends Component {
     }
 
     async componentDidMount() {
+        this.props.fetchAllDoctors();
         let res = await getAllCodeService('STATUS');
         if (res && res.errCode === 0) {
             let status_arr = res.data.filter(item => item.keyMap === 'S2' || item.keyMap === 'S4' || item.keyMap === 'S3');
@@ -51,19 +74,65 @@ class ManagePatient extends Component {
                 selectedStatus: status_arr && status_arr.length > 0 ? status_arr[0].keyMap : 'S2'
             })
         }
+        let { user } = this.props;
+        if (user.roleId === 'R2') {
+            this.setState({
+                is_doctor_login: true
+            })
+            await this.getAllPatientData(user.id);
+        }
+        else {
+            let { selectedOption } = this.state;
+            await this.getAllPatientData(selectedOption.value);
+        }
         await this.getAllPatientData();
     }
 
 
     componentDidUpdate(prevProps, preState) {
-
+        if (prevProps.doctors !== this.props.doctors) {
+            let inputDataSelect = this.setDataForSelect(this.props.doctors, 'USERS');
+            let { user } = this.props;
+            let selectedOption = inputDataSelect.find(doctor => doctor.value === user.id);
+            if (selectedOption) {
+                this.setState({
+                    arrDoctors: inputDataSelect,
+                    selectedOption: selectedOption
+                })
+            }
+            else {
+                this.setState({
+                    arrDoctors: inputDataSelect,
+                    selectedOption: inputDataSelect && inputDataSelect.length > 0 ? inputDataSelect[0] : ''
+                });
+            }
+        }
+        if (prevProps.language !== this.props.language) {
+            let inputDataSelect = this.setDataForSelect(this.props.doctors, 'USERS');
+            let { user } = this.props;
+            let selectedOption = inputDataSelect.find(doctor => doctor.value === user.id);
+            if (selectedOption) {
+                this.setState({
+                    arrDoctors: inputDataSelect,
+                    selectedOption: selectedOption
+                })
+            }
+            else {
+                this.setState({
+                    arrDoctors: inputDataSelect,
+                    selectedOption: inputDataSelect && inputDataSelect.length > 0 ? inputDataSelect[0] : ''
+                })
+            }
+        }
     }
 
     handleOnChangeDatePicker = (date) => {
+        let { selectedOption } = this.state;
+
         this.setState({
             selectedDate: date[0]
         }, async () => {
-            await this.getAllPatientData();
+            await this.getAllPatientData(selectedOption.value);
         })
     }
 
@@ -124,20 +193,22 @@ class ManagePatient extends Component {
     }
 
     handleOnChangeStatus = (event, id) => {
+        let { selectedOption } = this.state;
         let copyState = { ...this.state };
         copyState[id] = event.target.value;
         this.setState({
             ...copyState
         }, async () => {
-            await this.getAllPatientData();
+            await this.getAllPatientData(selectedOption.value);
         })
     }
 
 
     handleCancelAppointment = async (appointmentId) => {
+        let { selectedOption } = this.state;
         let res = await cancelAppointment(appointmentId)
         if (res && res.errCode === 0) {
-            await this.getAllPatientData();
+            await this.getAllPatientData(selectedOption.value);
         }
     }
 
@@ -149,15 +220,30 @@ class ManagePatient extends Component {
             dataFunc: appointment.id                 // Dữ liệu truyền vào cho handleFunc
         });
     }
+
+
+    handleChange = async (selectedOption) => {
+        this.setState({ selectedOption })
+        await this.getAllPatientData(selectedOption.value);
+    }
     render() {
         let { listPatient, status_booking, selectedStatus } = this.state;
         let { language } = this.props;
-        console.log('check state ', this.state)
         return (
             <div className='container'>
                 <div className='manage-patient-container'>
                     <div className='title'>Quản lý bệnh nhân</div>
                     <div className='manage-patient-content row'>
+                        <div className='col-6'>
+                            <label><FormattedMessage id='admin.manage-doctor.select-doctor' /></label>
+                            <Select
+                                value={this.state.selectedOption}
+                                onChange={this.handleChange}
+                                options={this.state.arrDoctors}
+                                placeholder={<FormattedMessage id='admin.manage-doctor.select-doctor' />}
+                                isDisabled={this.state.is_doctor_login}
+                            />
+                        </div>
                         <div className='col-6 form-group'>
                             <label>Chọn ngày khám</label>
                             <DatePicker
@@ -248,12 +334,15 @@ const mapStateToProps = state => {
     return {
         language: state.app.language,
         user: state.admin.adminInfo,
+        doctors: state.admin.doctors,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         setContentOfConfirmModal: (content) => dispatch(actions.setContentOfConfirmModal(content)),
+        fetchAllDoctors: () => dispatch(actions.fetchAllDoctorsStart()),
+
     };
 };
 

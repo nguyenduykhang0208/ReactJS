@@ -21,6 +21,9 @@ export const adminMenu = [
             ,
             {
                 name: 'menu.doctor.manage-schedule', link: '/doctor/manage-schedule'
+            },
+            {
+                name: 'menu.doctor.manage-patient', link: '/doctor/manage-patient'
             }
         ]
 
@@ -74,7 +77,7 @@ export const adminMenu = [
     { //Quản lý hóa đơn
         name: 'menu.admin.invoice', menus: [
             {
-                name: 'menu.admin.manage-invoice', link: '/system/manage-invoice'
+                name: 'menu.doctor.list-invoice', link: '/doctor/manage-invoice'
             }
         ]
 

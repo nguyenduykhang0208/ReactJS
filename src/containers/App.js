@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { ConnectedRouter as Router } from 'connected-react-router';
 import { history } from '../redux'
 import { ToastContainer, Zoom } from 'react-toastify';
@@ -52,6 +52,7 @@ class App extends Component {
     }
 
     render() {
+        const { homeMenuPath } = this.props;
         return (
             <Fragment>
                 <Router history={history}>
@@ -79,6 +80,8 @@ class App extends Component {
                                     <Route path={path.DETAIL_INVOICE} component={patientDetailInvoice} />
                                     <Route path={path.CONFIRM_BOOKING} component={confirmBookingEmail} />
                                     <Route path={path.VNPAY_RETURN} component={vnpayReturn} />
+                                    <Route component={() => { return (<Redirect to={homeMenuPath} />) }} />
+
                                 </Switch>
                             </CustomScrollbars>
                         </div>
