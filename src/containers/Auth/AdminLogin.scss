@@ -1,0 +1,216 @@
+@import "../../styles/styles.scss";
+
+.login-background {
+    background: url('../../assets/images/login/bg-01.jpg') no-repeat center center;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+
+    .login-container {
+        position: relative;
+        margin: auto;
+        width: 500px;
+        border-radius: 10px;
+        overflow: hidden;
+        justify-content: center;
+        background-color: #fff;
+
+        .auth-form {
+            font-size: 16px;
+            padding: 30px;
+            color: $text-color;
+
+            .auth-form__title {
+                display: block;
+                font-size: 34px;
+                font-weight: 600;
+                text-align: center;
+                margin-bottom: 50px;
+            }
+
+            .auth-form__group {
+                margin: 10px 0;
+                position: relative;
+                border-bottom: 2px solid #ccc;
+
+                .auth-form__input {
+                    width: 100%;
+                    min-height: 55px;
+                    border: none;
+                    outline: none;
+                    padding: 0 43px 0 43px;
+                    transition: all 0.4s;
+                }
+
+                .form__input-wrap {
+                    height: 100%;
+                    width: 100%;
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    pointer-events: none;
+
+                    &::after {
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        bottom: -2px;
+                        left: 0;
+                        width: 0;
+                        height: 2px;
+                        transition: all 0.4s;
+                        background-color: #7f7f7f;
+                    }
+
+                    .form__input-wrap-icon {
+                        display: block;
+                        position: absolute;
+                        top: 50%;
+                        left: 14px;
+                    }
+
+                    .show-pwd-icon {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        pointer-events: all;
+                        cursor: pointer;
+                        z-index: 1;
+                        bottom: 0;
+                        padding: 0px 10px 0 10px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        &:hover {
+                            background-color: #ccc;
+                        }
+                    }
+                }
+
+                .auth-form__input:focus+.form__input-wrap::after {
+                    width: 100%;
+                }
+            }
+
+            .auth-form__aside {
+                padding: 8px 0 18px 0;
+                text-align: right;
+
+                &-forgot-pwd {
+                    display: block;
+                    text-decoration: none;
+                    color: $text-in-light;
+
+                    &:hover {
+                        opacity: 0.8;
+                        color: $primary-color;
+                    }
+                }
+            }
+
+            .auth-form__controls {
+                text-align: center;
+                margin-top: 12px;
+
+                .wrap-login-btn {
+                    width: 100%;
+                    position: relative;
+                    border-radius: 25px;
+                    z-index: 1;
+                    overflow: hidden;
+                    // background-color: red;
+
+                    .btn-login {
+                        font-size: 18px;
+                        text-transform: uppercase;
+                        width: 100%;
+                        color: $white-color;
+                        height: 50px;
+
+                    }
+
+                    .btn-login--background {
+                        position: absolute;
+                        top: 0;
+                        z-index: -1;
+                        left: -100%;
+                        width: 300%;
+                        height: 100%;
+                        background: #a64bf4;
+                        background: -webkit-linear-gradient(right, #00dbde, #fc00ff, #00dbde, #fc00ff);
+                        -webkit-transition: all 0.4s;
+                        -o-transition: all 0.4s;
+                        -moz-transition: all 0.4s;
+                        transition: all 0.4s;
+                    }
+
+
+                    .btn-login:hover+.btn-login--background {
+                        left: 0;
+                    }
+                }
+
+            }
+
+            .socials-login-text {
+                padding: 4px 0;
+                margin-top: 20px;
+                display: block;
+            }
+
+            .auth-form__socials {
+                display: flex;
+                padding: 8px 36px;
+                align-items: center;
+                justify-content: center;
+
+                .auth-form__socials-link {
+                    text-decoration: none;
+                    display: block;
+                    margin: 5px;
+
+                    .form-socials-icon {
+                        color: $white-color;
+                        width: 50px;
+                        height: 50px;
+                        font-size: 25px;
+                        border-radius: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        &:hover {
+                            opacity: 0.7;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .form-socials--google {
+                        background-color: #ea4335;
+
+                    }
+
+                    .form-socials--facebook {
+                        background-color: #3b5998;
+                    }
+
+                    .form-socials--twitter {
+                        background-color: #1da1f2;
+                    }
+
+                }
+            }
+
+            .auth-form__footer {
+                margin-top: 30px;
+            }
+        }
+
+    }
+}

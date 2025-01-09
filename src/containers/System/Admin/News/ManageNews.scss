@@ -1,0 +1,56 @@
+@import '../../../../styles/styles.scss';
+
+.manage-news-container {
+    .news-content {
+        .heading-container {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+
+            .content-left {
+                width: 50%;
+                padding: 10px;
+
+                .specialty_img {
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 10px;
+                    height: 100%;
+
+                    .label-upload {
+                        background-color: #ccc;
+                        cursor: pointer;
+                        padding: 5px;
+                        border-radius: 3px;
+
+                        &:hover {
+                            opacity: 0.8;
+                        }
+                    }
+
+                    .preview-image {
+                        flex: 1;
+                        height: 50px;
+                        border: 1px solid #ccc;
+                        border-radius: 3px;
+                        cursor: pointer;
+                        background-size: contain;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                    }
+                }
+            }
+
+            .content-right {
+                width: 50%;
+                padding: 10px;
+            }
+        }
+
+
+
+        .btn-save-news {
+            margin: 10px 0;
+        }
+    }
+}

@@ -1,0 +1,200 @@
+{
+  "home-header": {
+    "home": "Home",
+    "news": "News",
+    "clinic": "Clinics",
+    "specialty": "Medical specialty",
+    "search-doctor": "Find a doctor by specialty",
+    "health-facility": "Health facilities",
+    "select-room": "Choose hospital clinic",
+    "doctor": "Doctor",
+    "select-doctor": "Choose a good doctor",
+    "fee": "Checkup package",
+    "check-health": "General health check",
+    "support": "Support",
+    "welcome": "Welcome, "
+  },
+  "banner": {
+    "title1": "MEDICAL PLATFORM",
+    "title2": "COMPREHENSIVE HEALTH CARE",
+    "child1": "Specialized examination",
+    "child2": "Remote examination",
+    "child3": "General examination",
+    "child4": "Medical test",
+    "child5": "Mental health",
+    "child6": "Dental examination"
+  },
+  "intro-item": {
+    "title1": "Leading experts - good doctors - experienced specialists",
+    "title2": "State of the art equipment",
+    "title3": "High treatment efficiency, outstanding achievements",
+    "title4": "Comprehensive, scientific, professional process",
+    "title5": "Premium Service, Reasonable Cost"
+  },
+  "menu": {
+    "admin": {
+      "user": "Users",
+      "manage-doctor": "Manage doctor",
+      "manage-admin": "Manage admin",
+      "crud": "CRUD user",
+      "manage-user": "Manage user",
+      "clinic": "Clinics",
+      "manage-clinic": "Manage clinic",
+      "specialty": "Specialties",
+      "manage-specialty": "Manage specialty",
+      "news": "News",
+      "manage-news": "Manage news",
+      "manage-handbook": "Manage handbook",
+      "analyst": "Statistical",
+      "dash-board": "DashBoard",
+      "income": "Income",
+      "medicine": "Medicine",
+      "manage-medicine": "Manage Medicine",
+      "manage-type-medicine": "Type of Medicine",
+      "invoice": "Invoice",
+      "manage-invoice": "Manage Invoice"
+    },
+    "doctor": {
+      "manage-schedule": "Manage doctor's schedule",
+      "manage-patient": "Manage patient"
+    }
+  },
+  "manage-user": {
+    "add": "Add new user",
+    "email": "Email",
+    "password": "Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phoneNumber": "Phone number",
+    "address": "Address",
+    "gender": "Gender",
+    "position": "Postion",
+    "role": "Role",
+    "save": "Save",
+    "edit": "Save changes",
+    "image": "Avatar"
+  },
+  "homePage": {
+    "outstanding-doctor": "Doctor featured last week",
+    "more-infor": "Show more",
+    "popular-specialties": "Popular specialties",
+    "hand-book": "Handbook",
+    "Outstanding-medical-facilities": "Outstanding medical facilities"
+  },
+  "manage-schedule": {
+    "title": "Manage doctor's schedule",
+    "select-doctor": "Select doctor",
+    "select-date": "Select date",
+    "save": "Save"
+  },
+  "patient": {
+    "detail-doctor": {
+      "schedule": "Schedule",
+      "no-schedule": "The doctor is not scheduled to work today!",
+      "book-free": "Choose and book (free)"
+    },
+    "doctor-contact-booking": {
+      "address": "Clinic's address",
+      "price": "Price: ",
+      "detail": "Show detail",
+      "payment": "Payment method: ",
+      "hide-price": "Hide"
+    },
+    "booking-modal": {
+      "title": "Register for medical examination",
+      "intro-text": "For customers who come to the hospital system for the first time for examination and use of services, please provide complete information of the person coming for examination according to the form below. Providing complete information will help you save time in making customer records at the hospital.",
+      "fullName": "Full name",
+      "birthDay": "Date of birth",
+      "phoneNumber": "Phone number",
+      "email": "Email",
+      "address": "Address",
+      "gender": "Gender",
+      "disease_desc": "Describe the health problem",
+      "add": "Add",
+      "close": "Close",
+      "price": "Examination price: ",
+      "fee": "Free booking",
+      "note": "Note (allergy....):",
+      "send": "Send"
+    },
+    "my-account": {
+      "note": "Note",
+      "phoneNumber": "Phone number",
+      "phoneNumber2": "Phone number 2",
+      "birthDay": "Date of birth",
+      "address": "Address",
+      "firstName": "First Name",
+      "lastName:": "Last Name",
+      "gender": "Gender",
+      "save": "Save",
+      "title": "My account"
+    },
+    "history_appointment": {
+      "doctor_name": "Doctor's name",
+      "date": "Examination date",
+      "time": "Time",
+      "status": "Status",
+      "is_paid": "Is Paid"
+    }
+  },
+  "admin": {
+    "manage-doctor": {
+      "title": "Add doctor's infor",
+      "select-doctor": "Select doctor",
+      "intro": "Introduction",
+      "save": "Save",
+      "price": "Price",
+      "payment": "Payment",
+      "province": "Province",
+      "nameClinic": "Clinic's name",
+      "addressClinic": "Clinic's address",
+      "note": "Note",
+      "specialty": "Specialty",
+      "clinic": "Clinic"
+    },
+    "manage-user": {
+      "list-user": "List Users"
+    },
+    "manage-clinic": {
+      "list-clinic": "List Clinics"
+    },
+    "manage-news": {
+      "list-news": "List post"
+    },
+    "manage-specialty": {
+      "list-specialty": "List Specialty"
+    },
+    "manage-medicine": {
+      "list-medicines": "List Medicine",
+      "manage-medicine": "Manage Medicine",
+      "name": "Name",
+      "expire": "Expire Date",
+      "production_date": "Production Date",
+      "image": "Image",
+      "quantity": "Quantity",
+      "price": "Price",
+      "description": "Description",
+      "add": "Add",
+      "save": "Save"
+    }
+  },
+  "doctor": {
+    "manage-patient": {
+      "content_modal": "Are you sure?",
+      "ok": "Yes",
+      "cancel": "Cancel",
+      "title_modal": "Confirm to cancel"
+    }
+  },
+  "searchControl": {
+    "search": "Search",
+    "placeholder": "Enter your keyword",
+    "searchInfo": "You're finding"
+  },
+  "common": {
+    "confirm": "Accept to confirm",
+    "close": "Close",
+    "accept": "OK",
+    "confirm-this-task": ""
+  }
+}

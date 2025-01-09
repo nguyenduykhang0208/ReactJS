@@ -1,0 +1,17 @@
+@import '../../../styles/styles.scss';
+
+.vnpay_return_container {
+    .confirm-message {
+        margin-top: 80px;
+        padding-top: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: $primary-color;
+        font-size: 17px;
+    }
+
+    .redirect-message {
+        text-align: center;
+    }
+}

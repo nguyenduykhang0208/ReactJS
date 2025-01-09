@@ -1,0 +1,41 @@
+.detail-invoice-c ontainer {
+    .general_invoice {
+        .general_invoice_heading {
+            margin: 5px 0;
+            font-style: italic;
+            color: #ccc;
+        }
+    }
+
+    .detail_invoice {
+        margin: 10px 0;
+
+        .detail_invoice_heading {
+            margin: 5px 0;
+            font-style: italic;
+            color: #ccc;
+        }
+    }
+
+    .btn-back {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    .price_appointment,
+    .total_price_invoice {
+        label {
+            min-width: 90px;
+            font-weight: 600;
+        }
+    }
+
+    .total_price_invoice {
+        margin: 20px 0;
+    }
+}

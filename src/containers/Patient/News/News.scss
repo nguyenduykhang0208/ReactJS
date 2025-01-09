@@ -1,0 +1,45 @@
+@import '../../../styles/styles.scss';
+
+.news-container {
+    padding: 0 100px;
+    margin-top:calc(#{$header-height + 20px});
+
+    .news_wrapper {
+        display: flex;
+        gap: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+
+        &:hover {
+            color: $primary-color;
+            cursor: pointer;
+        }
+
+        .news_content {
+            .news_description {
+                overflow: hidden;
+                max-width: 500px;
+                height: 100px;
+            }
+
+            .news_title {
+                font-weight: 600;
+            }
+
+            .news_time {
+                font-size: 14px;
+                color: #ccc;
+                font-style: italic;
+            }
+        }
+
+        .news_img {
+            width: 350px;
+            height: 190px;
+            // background: url('../../../assets/images/giam-gan-6kg-trong-1-thang.jpg') no-repeat center center;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    }
+}

@@ -1,0 +1,66 @@
+/*
+ * General styles
+ */
+
+body,
+html {
+  font-family: $fontmain;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.grid.wide {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+// .btn {
+//   padding: 0;
+//   border: none;
+//   cursor: pointer;
+//   font-weight: 700;
+//   height: 30px;
+//   line-height: 30px;
+//   -moz-user-select: none;
+//   -webkit-user-select: none;
+//   user-select: none;
+
+//   i {
+//     font-size: $base-size - 3px;
+//   }
+// }
+.my-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+  height: 26px;
+  line-height: 26px;
+  min-width: 60px;
+  border-radius: 3px;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 2px 0;
+}
+
+.content-container {
+  .title {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: $base-size + 4px;
+    margin-top: 15px;
+    color: $colormain;
+  }
+
+  .content {
+    margin: 15px 30px;
+    box-shadow: 2px 2px 4px 0 $box-shadow-color;
+    -webkit-box-shadow: 2px 2px 4px 0 $box-shadow-color;
+  }
+}

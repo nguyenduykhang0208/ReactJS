@@ -1,0 +1,115 @@
+@import "../../styles/styles.scss";
+
+.sign-up_background {
+    background: url('../../assets/images/login/bg-01.jpg') no-repeat center center;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    position: absolute;
+
+    .sign-up_container {
+        margin: auto;
+        width: 500px;
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #fff;
+
+        .sign-up_form {
+            font-size: 16px;
+            padding: 30px;
+            color: $text-color;
+
+            .form__title {
+                display: block;
+                font-size: 34px;
+                font-weight: 600;
+                text-align: center;
+                margin-bottom: 15px;
+            }
+
+            .signUp_input_wrap {
+                input {
+                    margin-bottom: 20px;
+                }
+
+                .gender-select {
+                    margin-bottom: 20px;
+                }
+
+                .pwd_wrap {
+                    position: relative;
+
+                    .pwd_input {
+                        padding-right: 25px;
+                    }
+
+                    .show-pwd-icon {
+                        position: absolute;
+                        right: 5px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        cursor: pointer;
+                    }
+                }
+
+            }
+        }
+
+
+
+        .auth-form__controls {
+            text-align: center;
+            margin-top: 12px;
+
+            .wrap-login-btn {
+                width: 100%;
+                position: relative;
+                border-radius: 25px;
+                z-index: 1;
+                overflow: hidden;
+                // background-color: red;
+
+                .btn-login {
+                    font-size: 18px;
+                    text-transform: uppercase;
+                    width: 100%;
+                    color: $white-color;
+                    height: 50px;
+
+                }
+
+                .btn-login--background {
+                    position: absolute;
+                    top: 0;
+                    z-index: -1;
+                    left: -100%;
+                    width: 300%;
+                    height: 100%;
+                    background: #a64bf4;
+                    background: -webkit-linear-gradient(right, #00dbde, #fc00ff, #00dbde, #fc00ff);
+                    -webkit-transition: all 0.4s;
+                    -o-transition: all 0.4s;
+                    -moz-transition: all 0.4s;
+                    transition: all 0.4s;
+                }
+
+
+                .btn-login:hover+.btn-login--background {
+                    left: 0;
+                }
+            }
+
+        }
+
+
+
+        .auth-form__footer {
+            margin-top: 30px;
+        }
+    }
+
+}

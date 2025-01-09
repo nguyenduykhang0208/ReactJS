@@ -1,0 +1,81 @@
+@import '../../../styles/styles.scss';
+
+.doctor-contact-container {
+    padding: 10px 20px;
+
+    .clinic-content {
+        .clinic-content__heading {
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+
+        .clinic-content__name {
+            font-weight: 600;
+        }
+
+        .clinic-content__address {
+            font-style: italic;
+        }
+    }
+
+    .detail-contact-content {
+        padding-top: 15px;
+
+        .detail-contact__heading {
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+
+        .detail-contact__wrap {
+            border: 1px solid #ccc;
+            margin: 5px 0;
+            background-color: #f8f8f8;
+
+            .price-detail {
+                padding: 5px 10px;
+
+                .total-price {
+                    float: right;
+
+                    .currency {
+                        margin: 0 10px;
+                    }
+                }
+
+                .note {
+                    font-style: italic;
+                    font-size: 14px;
+                }
+            }
+
+            .payment {
+                padding: 5px 10px;
+                border-top: 1px solid #ccc;
+            }
+        }
+
+        .detail-contact__hide {
+            span {
+                cursor: pointer;
+                font-size: 14px;
+                color: $colormain;
+
+                &:hover {
+                    color: $primary-color;
+                }
+            }
+        }
+
+        .detail-contact__show {
+            span {
+                cursor: pointer;
+                font-size: 14px;
+                color: $colormain;
+
+                &:hover {
+                    color: $primary-color;
+                }
+            }
+        }
+    }
+}

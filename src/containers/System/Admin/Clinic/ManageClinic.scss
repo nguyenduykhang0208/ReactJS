@@ -1,0 +1,38 @@
+@import '../../../../styles/styles.scss';
+
+.manage-specialty-container {
+    .specialty-content {
+        .specialty_img {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            height: 100%;
+
+            .label-upload {
+                background-color: #ccc;
+                cursor: pointer;
+                padding: 5px;
+                border-radius: 3px;
+
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+
+            .preview-image {
+                flex: 1;
+                height: 50px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                cursor: pointer;
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+
+        .btn-save-specialty {
+            margin: 10px 0;
+        }
+    }
+}

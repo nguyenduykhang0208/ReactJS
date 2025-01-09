@@ -1,0 +1,35 @@
+@import '../../../styles/styles.scss';
+
+.detail-news-container {
+    margin-top: 60px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+
+    .news_content {
+        width: 875px;
+
+        .news_heading {
+            font-size: 20px;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: $colormain;
+        }
+
+        .news_time {
+            font-style: italic;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .news_desciption {
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        .news_content {
+            margin-top: 20px;
+            text-align: justify;
+        }
+    }
+}

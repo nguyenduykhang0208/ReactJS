@@ -1,0 +1,203 @@
+{
+  "home-header": {
+    "home": "Trang chủ",
+    "news": "Tin tức",
+    "clinic": "Phòng khám",
+    "specialty": "Chuyên khoa",
+    "search-doctor": "Tìm kiếm bác sĩ theo chuyên khoa",
+    "health-facility": "Cơ sở y tế",
+    "select-room": "Chọn phòng khám",
+    "doctor": "Bác sĩ",
+    "select-doctor": "Chọn bác sĩ giỏi",
+    "fee": "Gói khám",
+    "check-health": "Khám sức khỏe tổng quát",
+    "support": "Hỗ trợ",
+    "welcome": "Xin chào, "
+  },
+  "banner": {
+    "title1": "Nền tảng y tế",
+    "title2": "Chăm sóc sức khỏe toàn diện",
+    "child1": "Khám chuyên khoa",
+    "child2": "Khám từ xa",
+    "child3": "Khám tổng quát",
+    "child4": "Xét nghiệm y học",
+    "child5": "Sức khỏe tinh thần",
+    "child6": "Khám nha khoa"
+  },
+  "intro-item": {
+    "title1": "Chuyên gia đầu ngành - bác sĩ giỏi - chuyên viên giàu kinh nghiệm",
+    "title2": "Trang thiết bị hiện đại bậc nhất",
+    "title3": "Hiệu quả điều trị cao, thành tựu nổi bật",
+    "title4": "Quy trình toàn diện, khoa học, chuyên nghiệp",
+    "title5": "Dịch vụ cao cấp, Chi phí hợp lý"
+  },
+  "menu": {
+    "admin": {
+      "user": "Người dùng",
+      "manage-doctor": "Quản lý bác sĩ",
+      "manage-admin": "Quản lý admin",
+      "crud": "CRUD user",
+      "manage-user": "Quản lý người dùng",
+      "clinic": "Phòng khám",
+      "manage-clinic": "Quản lý phòng khám",
+      "specialty": "Chuyên khoa",
+      "manage-specialty": "Quản lý chuyên khoa",
+      "news": "Tin tức",
+      "manage-news": "Quản lý tin tức",
+      "manage-handbook": "Quản lý cẩm nang",
+      "analyst": "Thống kê",
+      "dash-board": "Thống kê tổng quan",
+      "income": "Doanh thu",
+      "medicine": "Thuốc",
+      "manage-medicine": "Quản lý thuốc",
+      "manage-type-medicine": "Quản lý loại thuốc",
+      "invoice": "Hóa đơn",
+      "manage-invoice": "Quản lý hóa đơn"
+    },
+    "doctor": {
+      "manage-schedule": "Quản lý lịch khám bệnh",
+      "manage-patient": "Quản lý bệnh nhân",
+      "manage-appointment": "Quản lý lịch hẹn",
+      "list-appointment": "Danh sách lịch hẹn",
+      "manage-invoice": "Quản lý hóa đơn",
+      "list-invoice": "Danh sách hóa đơn"
+    }
+  },
+  "manage-user": {
+    "add": "Thêm mới người dùng",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "firstName": "Tên",
+    "lastName": "Họ",
+    "phoneNumber": "Số điện thoại",
+    "address": "Địa chỉ",
+    "gender": "Giới tính",
+    "position": "Chức vụ",
+    "role": "Vai trò",
+    "save": "Lưu",
+    "edit": "Lưu thay đổi",
+    "image": "Ảnh đại diện"
+  },
+  "homePage": {
+    "outstanding-doctor": "Bác sĩ nổi bật tuần qua",
+    "more-infor": "Xem thêm",
+    "popular-specialties": "Chuyên khoa phổ biến",
+    "hand-book": "Cẩm nang",
+    "Outstanding-medical-facilities": "Cơ sở y tế nổi bật"
+  },
+  "manage-schedule": {
+    "title": "Quản lý lịch khám bệnh",
+    "select-doctor": "Chọn bác sĩ",
+    "select-date": "Chọn ngày",
+    "save": "Lưu"
+  },
+  "patient": {
+    "detail-doctor": {
+      "schedule": "Lịch khám",
+      "no-schedule": "Bác sĩ chưa có lịch làm việc trong ngày này!",
+      "book-free": "Chọn và đặt lịch (miễn phí)"
+    },
+    "doctor-contact-booking": {
+      "address": "Địa chỉ phòng khám",
+      "price": "Giá khám: ",
+      "detail": "Xem chi tiết",
+      "payment": "Phương thức thanh toán: ",
+      "hide-price": "Ẩn bảng giá"
+    },
+    "booking-modal": {
+      "title": "Đăng ký khám bệnh",
+      "intro-text": "Đối với các khách hàng lần đầu đến khám và sử dụng dịch vụ tại Hệ thống Bệnh viện, xin vui lòng cung cấp đầy đủ các thông tin của người đến khám theo mẫu bên dưới. Việc cung cấp đầy đủ thông tin sẽ giúp Quý khách tiết kiệm được thời gian làm hồ sơ khách hàng tại bệnh viện.",
+      "fullName": "Họ và tên",
+      "birthDay": "Ngày sinh",
+      "phoneNumber": "Số điện thoại",
+      "email": "Email",
+      "address": "Địa chỉ liên hệ",
+      "gender": "Giới tính",
+      "disease_desc": "Mô tả vấn đề sức khỏe",
+      "add": "Đặt lịch",
+      "close": "Đóng",
+      "price": "Giá khám: ",
+      "fee": "Miễn phí đặt lịch",
+      "note": "Ghi chú(dị ứng....):",
+      "send": "Gửi"
+    },
+    "my-account": {
+      "note": "Ghi chú",
+      "phoneNumber": "Số điện thoại",
+      "phoneNumber2": "Số điện thoại 2",
+      "birthDay": "Ngày sinh",
+      "address": "Địa chỉ",
+      "firstName": "Tên",
+      "lastName:": "Họ",
+      "gender": "Giới tính",
+      "save": "Lưu",
+      "title": "Thông tin tài khoản"
+    },
+    "history_appointment": {
+      "doctor_name": "Tên bác sĩ",
+      "date": "Ngày khám",
+      "time": "Thời gian",
+      "status": "Trạng thái",
+      "is_paid": "Thanh toán"
+    }
+  },
+  "admin": {
+    "manage-doctor": {
+      "title": "Thêm thông tin bác sĩ",
+      "select-doctor": "Chọn bác sĩ",
+      "intro": "Thông tin giới thiệu",
+      "save": "Lưu",
+      "price": "Giá khám bệnh",
+      "payment": "Phương thức thanh toán",
+      "province": "Tỉnh thành",
+      "nameClinic": "Tên phòng khám",
+      "addressClinic": "Địa chỉ phòng khám",
+      "note": "Ghi chú",
+      "specialty": "Chọn chuyên khoa",
+      "clinic": "Chọn phòng khám"
+    },
+    "manage-user": {
+      "list-user": "Danh sách người dùng"
+    },
+    "manage-clinic": {
+      "list-clinic": "Danh sách phòng khám"
+    },
+    "manage-news": {
+      "list-news": "Danh sách tin tức"
+    },
+    "manage-specialty": {
+      "list-specialty": "Danh sách chuyên khoa"
+    },
+    "manage-medicine": {
+      "list-medicines": "Danh sách thuốc",
+      "manage-medicine": "Quản lý thuốc",
+      "name": "Tên thuốc",
+      "expire": "HSD",
+      "production_date": "NSX",
+      "image": "Ảnh đại diện",
+      "quantity": "Số lượng",
+      "price": "Gía bán",
+      "description": "Mô tả",
+      "add": "Thêm mới",
+      "save": "Lưu"
+    }
+  },
+  "doctor": {
+    "manage-patient": {
+      "content_modal": "Bạn đã xác nhận chưa?",
+      "ok": "Có",
+      "cancel": "Không",
+      "title_modal": "Xác nhận hủy"
+    }
+  },
+  "searchControl": {
+    "search": "Tìm",
+    "placeholder": "Nhập từ khóa",
+    "searchInfo": "Bạn đang tìm kiếm"
+  },
+  "common": {
+    "confirm": "Xác nhận",
+    "close": "Đóng",
+    "accept": "OK"
+  }
+}

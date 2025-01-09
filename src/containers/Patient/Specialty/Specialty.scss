@@ -1,0 +1,40 @@
+.detail-specialty-container {
+    margin-top: 60px;
+    // padding: 20px 40px 0px;
+
+    .specialty-content {
+        box-shadow: 0 1px 6px #20212447;
+        margin-bottom: 10px;
+        padding: 20px 40px;
+    }
+
+    .specialty_doctor_wrap {
+        background-color: #eee;
+        padding: 20px 40px 20px;
+
+        .search-specialty_doctor {}
+
+        .specialty_doctor_info {
+            display: flex;
+            min-height: 380px;
+            box-shadow: 0 1px 6px #20212447;
+            margin-bottom: 10px;
+            background-color: #fff;
+
+            .specialty_doctor_desc {
+                width: 40%;
+                padding: 20px 10px;
+                border-right: 1px solid #ccc;
+            }
+
+            .specialty_doctor_booking {
+                width: 60%;
+                padding: 10px;
+
+                .doctor-contact-container {
+                    padding: 10px 0px;
+                }
+            }
+        }
+    }
+}

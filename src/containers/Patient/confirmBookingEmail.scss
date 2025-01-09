@@ -1,0 +1,13 @@
+@import '../../styles/styles.scss';
+
+.confirm-booking-container {
+    .confirm-message {
+        margin-top: $header-height ;
+        padding-top: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: $primary-color;
+        font-size: 17px;
+    }
+}

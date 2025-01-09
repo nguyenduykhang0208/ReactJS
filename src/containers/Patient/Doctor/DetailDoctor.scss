@@ -1,0 +1,73 @@
+@import '../../../styles/styles.scss';
+
+.detail-doctor-container {
+    margin-top:calc(#{$header-height});
+    padding-top: 20px;
+
+    .intro-doctor {
+        display: flex;
+        padding: 0 100px;
+
+        .content-left {
+            flex: 0.2;
+
+            .doctor-image {
+                padding-top: 100%;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                box-shadow: 0 1px 3px #ccc;
+                border: 1px solid #ccc;
+            }
+
+        }
+
+
+        .content-right {
+            flex: 0.8;
+            display: flex;
+            flex-direction: column;
+            padding-left: 20px;
+
+            &__title {
+                font-size: 20px;
+                font-weight: 600;
+            }
+
+            &__description {
+                padding: 10px 0;
+            }
+        }
+    }
+
+    .doctor-schedule {
+        margin: 0 100px;
+        padding: 10px 0;
+        display: flex;
+        min-height: 200px;
+
+        .content-left {
+            width: 50%;
+            border-right: 1px solid #ccc;
+        }
+
+        .content-right {
+            width: 50%;
+        }
+    }
+
+    .detail-info {
+        padding: 20px 100px;
+        background-color: #f9f9f9;
+        border-top: 1px solid #ccc;
+
+        h3 {
+            font-size: 17px;
+        }
+    }
+
+    .doctor_recommend {
+        padding: 20px 100px;
+        font-weight: 600;
+    }
+}

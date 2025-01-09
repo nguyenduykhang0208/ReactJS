@@ -1,0 +1,180 @@
+@import '../../styles/styles.scss';
+
+// reset slick slider css
+.slick-prev {
+    left: -10px !important;
+    z-index: 1 !important;
+}
+
+.slick-disabled {
+    display: none !important;
+}
+
+.slick-next {
+    right: -10px !important;
+}
+
+.slick-prev::before,
+.slick-next::before {
+    font-family: FontAwesome !important;
+    color: red !important;
+    height: 100% !important;
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slick-prev,
+.slick-next {
+    width: 44px !important;
+    height: 48px !important;
+    background-color: #fff !important;
+    border: 2px solid #d7d7d7 !important;
+    font-family: FontAwesome !important;
+
+    &:hover {
+        background-color: #d7d7d7 !important;
+    }
+}
+
+//section body
+.section-share {
+    &.section-specialty {
+        background-color: #f5f5f5;
+    }
+
+    &.section-oustanding-doctor {
+        background-color: #f5f5f5;
+    }
+
+    &.section-about {
+        height: 500px;
+        border-top: 1px solid #f5f5f5;
+    }
+
+    .section-body {
+        .section-customize {
+            text-align: center;
+            cursor: pointer;
+            width: 90%;
+
+            &:hover {
+                color: $primary-color;
+            }
+
+            .bg-image {
+                margin: auto;
+                width: 278px;
+                height: 150px;
+                background-color: #eee;
+                background-position: center center;
+                background-size: cover;
+                background-repeat: no-repeat;
+
+                &.specialty-img {
+                    // background-image: url('../../assets/images/specialty/co-xuong-khop.png');
+                }
+
+                &.medical-facility-img {
+                    background-image: url('../../assets/images/medical-facility/logo-thucuc.png');
+                }
+
+                &.doctor-img {
+                    background-image: url('../../assets/images/doctor/doctor.png');
+                    width: 120px;
+                    height: 120px;
+                    margin: 0 auto;
+                    border-radius: 50%;
+                }
+
+                &.handBook-img {
+                    background-position: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    // background-image: url('../../assets/images/hand-book/1-ngay-an-bao-nhieu-calo-de-giam-can.jpg');
+                }
+            }
+        }
+    }
+}
+
+//section header
+.section-share {
+    height: 330px;
+
+    .section-container {
+        margin: 0 100px;
+        display: flex;
+        flex-direction: column;
+
+        .section-header {
+            height: 60px;
+            margin: 20px 0;
+            padding: 20px 0;
+
+            // flex-direction: column;
+            .title-section {
+                font-size: 22px;
+                font-weight: 600;
+            }
+
+            .btn-section {
+                float: right;
+                padding: 10px 15px;
+                outline: none;
+                border: none;
+                background-color: #ebebeb;
+                color: $text-color;
+                cursor: pointer;
+                text-transform: uppercase;
+
+                &:hover {
+                    background-color: $primary-color;
+                    color: $white-color;
+                }
+            }
+        }
+
+
+    }
+}
+
+.section-outstanding-doctor {
+    .section-customize {
+        padding: 0 10px;
+
+        .doctor-info {
+            border: 1px solid #ccc;
+            padding: 20px 0;
+
+            .doctor-major {
+                margin-top: 10px;
+            }
+        }
+    }
+}
+
+.section-about {
+    padding: 0 100px;
+
+    .section-about-header {
+        padding: 20px 10px;
+        font-size: 22px;
+        font-weight: 600;
+    }
+
+    .section-about-content {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+
+        .content-left {
+            width: 60%;
+        }
+
+        .content-right {
+            width: 40%;
+        }
+    }
+}

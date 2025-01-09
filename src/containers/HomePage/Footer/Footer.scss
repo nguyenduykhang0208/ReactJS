@@ -1,0 +1,87 @@
+@import '../../../styles/styles.scss';
+
+.section-Footer {
+    border-top: 4px solid $primary-color;
+    padding-top: 16px;
+
+    .footer__content {
+        padding: 0 40px;
+        display: flex;
+        flex-basis: 20%;
+        justify-content: space-around;
+
+        .footer-info-wrap {
+            .footer__heading {
+                font-size: 18px;
+                font-weight: 500;
+                margin: 14px 0;
+                color: $text-color;
+                text-transform: uppercase;
+            }
+
+            .footer-list {
+                list-style: none;
+                padding-left: 0;
+                text-align: left;
+                font-size: 14px;
+
+                .footer-item {
+                    .footer-item__link {
+                        text-decoration: none;
+                        color: #737373;
+                        display: flex;
+                        align-items: center;
+
+                        .footer-item__icon {
+                            font-size: 17px;
+                            margin-right: 8px;
+                        }
+
+                        &:hover {
+                            color: $primary-color;
+                        }
+                    }
+                }
+            }
+
+            .footer__download {
+                display: flex;
+
+                .footer__download-qr {
+                    width: 80px;
+                    object-fit: contain;
+                    border: 1px solid #dee2e6;
+                }
+
+                .footer__download-apps {
+                    margin-left: 16px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    .footer__download-apps-img {
+                        height: 20px;
+                    }
+
+                    .footer__download-apps-link {
+                        text-decoration: none;
+                        color: transparent;
+                    }
+                }
+            }
+        }
+    }
+
+    .footer__bottom {
+        background-color: #edf5f3;
+        padding: 8px 0;
+        margin-top: 36px;
+
+        .footer__text {
+            margin: 0;
+            text-align: center;
+            font-size: 14px;
+            color: #737373;
+        }
+    }
+}

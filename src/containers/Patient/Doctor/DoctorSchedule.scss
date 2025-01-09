@@ -1,0 +1,51 @@
+@import '../../../styles/styles.scss';
+
+.doctor-schedule-container {
+    padding: 10px 0;
+
+    .all-schedule {
+        .date-select {
+            text-transform: capitalize;
+        }
+    }
+
+    .all-available-time {
+        .text-calendar {
+            margin: 10px 0;
+
+            i {
+                margin-right: 5px;
+            }
+
+            span {
+                text-transform: uppercase;
+            }
+        }
+
+        .time-content {
+            .time-content-button {
+                margin: 10px 0;
+                display: flex;
+                flex-flow: wrap;
+                gap: 10px;
+
+                .btn-schedule {
+                    height: 36px;
+                    line-height: 36px;
+                    padding: 2px 10px;
+                    min-width: 170px;
+
+                    &:hover {
+                        color: $white-color;
+                        background-color: $primary-color;
+                    }
+
+                    &.active {
+                        background-color: $primary-color;
+                        color: $white-color;
+                    }
+                }
+            }
+        }
+    }
+}

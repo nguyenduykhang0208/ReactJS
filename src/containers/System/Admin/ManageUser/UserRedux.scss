@@ -1,0 +1,27 @@
+.user-avatar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .label-upload {
+        background-color: #ccc;
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 3px;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    .preview-image {
+        flex: 0.9;
+        height: 50px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        cursor: pointer;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+}

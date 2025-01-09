@@ -1,0 +1,30 @@
+@import '../../../styles/styles.scss';
+
+.manage-schedule-container {
+    padding: 20px 100px;
+
+    .pick-hour-container {
+        margin: 10px 0;
+        padding: 10px;
+        display: flex;
+        flex-flow: wrap;
+        justify-content: space-between;
+        gap: 10px;
+
+        .btn-schedule {
+            height: 36px;
+            line-height: 36px;
+            padding: 2px 10px;
+
+            &:hover {
+                color: $white-color;
+                background-color: $primary-color;
+            }
+
+            &.active {
+                background-color: $primary-color;
+                color: $white-color;
+            }
+        }
+    }
+}

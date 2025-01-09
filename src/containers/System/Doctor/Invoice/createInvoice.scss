@@ -1,0 +1,33 @@
+.invoice-container {
+    .invoice-body {
+        .general_invoice {
+            margin: 5px 0;
+            font-style: italic;
+            color: #ccc;
+        }
+
+        .medicine_invoice {
+            .heading_text {
+                margin: 5px 0;
+                font-style: italic;
+                color: #ccc;
+            }
+        }
+    }
+
+    .price_appointment,
+    .total_price_invoice {
+        label {
+            min-width: 90px;
+            font-weight: 600;
+        }
+    }
+
+    .price_appointment {
+        margin: 10px 0;
+    }
+
+    .btn-save-invoice {
+        float: right;
+    }
+}
