@@ -16,7 +16,7 @@ class DoctorContact extends Component {
         }
     }
     async componentDidMount() {
-        if (this.props.doctorId) {
+        if (this.props.doctorId && this.props.doctorId !== -1) {
             let res = await getDoctorBookingInfor(this.props.doctorId);
             if (res && res.errCode === 0) {
                 this.setState({
@@ -31,11 +31,13 @@ class DoctorContact extends Component {
 
         }
         if (prevProps.doctorId !== this.props.doctorId) {
-            let res = await getDoctorBookingInfor(this.props.doctorId);
-            if (res && res.errCode === 0) {
-                this.setState({
-                    doctor_booking_infor: res.data
-                })
+            if (this.props.doctorId !== -1) {
+                let res = await getDoctorBookingInfor(this.props.doctorId);
+                if (res && res.errCode === 0) {
+                    this.setState({
+                        doctor_booking_infor: res.data
+                    })
+                }
             }
         }
     }
@@ -52,8 +54,8 @@ class DoctorContact extends Component {
             <div className='doctor-contact-container'>
                 <div className='clinic-content'>
                     <div className='clinic-content__heading'><FormattedMessage id='patient.doctor-contact-booking.address' /></div>
-                    <div className='clinic-content__name'>{doctor_booking_infor && doctor_booking_infor.nameClinic ? doctor_booking_infor.nameClinic : ''}</div>
-                    <div className='clinic-content__address'>{doctor_booking_infor && doctor_booking_infor.addressClinic ? doctor_booking_infor.addressClinic : ''}</div>
+                    <div className='clinic-content__name'>{doctor_booking_infor && doctor_booking_infor?.clinicData?.name ? doctor_booking_infor?.clinicData?.name : ''}</div>
+                    <div className='clinic-content__address'>{doctor_booking_infor && doctor_booking_infor?.clinicData?.address ? doctor_booking_infor?.clinicData?.address : ''}</div>
                 </div>
                 <div className='detail-contact-content'>
                     {isShowDetailPrice === false &&

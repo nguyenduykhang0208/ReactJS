@@ -101,7 +101,24 @@ class SignUp extends Component {
             birthDay: ''
         })
     }
+
+    validateEmail = (email) => {
+        const isValidEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+        if (email.match(isValidEmail)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     handleRegister = async () => {
+        let { username } = this.state;
+        let check = this.validateEmail(username);
+        if (!check) {
+            alert('Email không hợp lệ')
+            return;
+        }
+
         let date = this.state.birthDay;
         let birthDay = moment(date).format('DD/MM/YYYY');
         let isValid = this.checkValidateInput();
@@ -144,7 +161,7 @@ class SignUp extends Component {
                                     id='username'
                                     className='form-control'
                                     type='text'
-                                    placeholder='Username'
+                                    placeholder='Email'
                                     value={this.state.username}
                                     onChange={(event) => this.handleOnChangeInput(event, 'username')}
                                     onKeyDown={(event) => this.handleEnterPress(event)}
@@ -203,6 +220,7 @@ class SignUp extends Component {
                                     className='form-control'
                                     placeholder='BirthDay'
                                     selected={this.state.birthDay}
+                                    maxDate={new Date()}
                                 />
                             </div>
                             <div className='col-12' style={{ color: 'red' }}>

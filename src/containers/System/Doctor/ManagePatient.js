@@ -5,7 +5,7 @@ import { LANGUAGES } from '../../../utils';
 import DatePicker from '../../../components/Input/DatePicker';
 import { getAllPatient } from '../../../services/userService';
 import moment, { lang } from 'moment';
-import { sendBill, getAllCodeService, cancelAppointment } from '../../../services/userService';
+import { sendBill, getAllCodeService, cancelAppointment, doctorConfirmAppointment } from '../../../services/userService';
 import { toast } from 'react-toastify';
 import LoadingOverlay from 'react-loading-overlay';
 import ConfirmModal from '../../../components/ConfirmModal';
@@ -68,7 +68,7 @@ class ManagePatient extends Component {
         this.props.fetchAllDoctors();
         let res = await getAllCodeService('STATUS');
         if (res && res.errCode === 0) {
-            let status_arr = res.data.filter(item => item.keyMap === 'S2' || item.keyMap === 'S4' || item.keyMap === 'S3');
+            let status_arr = res.data.filter(item => item.keyMap === 'S2' || item.keyMap === 'S4' || item.keyMap === 'S3' || item.keyMap === 'S1');
             this.setState({
                 status_booking: status_arr,
                 selectedStatus: status_arr && status_arr.length > 0 ? status_arr[0].keyMap : 'S2'
@@ -212,6 +212,24 @@ class ManagePatient extends Component {
         }
     }
 
+    handleConfirmAppointment = async (appointmentId) => {
+        let { selectedOption } = this.state;
+        let res = await doctorConfirmAppointment(appointmentId)
+        if (res && res.errCode === 0) {
+            await this.getAllPatientData(selectedOption.value);
+        }
+    }
+
+
+    handleOpenModalConfirm = async (appointment) => {
+        this.props.setContentOfConfirmModal({
+            isOpen: true,
+            messageId: "doctor.manage-patient.content_modal", // ID của thông báo cần hiển thị
+            handleFunc: this.handleConfirmAppointment,        // Hàm sẽ được gọi khi nhấn "Accept"
+            dataFunc: appointment.id                 // Dữ liệu truyền vào cho handleFunc
+        });
+    }
+
     handleOpenModal = async (appointment) => {
         this.props.setContentOfConfirmModal({
             isOpen: true,
@@ -300,6 +318,13 @@ class ManagePatient extends Component {
                                                         &&
                                                         <>
                                                             <button className='my-btn btn-confirm' onClick={() => this.handleCreateInvoice(item)}>Tạo HD</button>
+                                                            <button className='my-btn btn-cancel' onClick={() => this.handleOpenModal(item)}>Hủy</button>
+                                                        </>
+                                                    }
+                                                    {selectedStatus === 'S1'
+                                                        &&
+                                                        <>
+                                                            <button className='my-btn btn-confirm' onClick={() => this.handleOpenModalConfirm(item)}>Xác nhận</button>
                                                             <button className='my-btn btn-cancel' onClick={() => this.handleOpenModal(item)}>Hủy</button>
                                                         </>
                                                     }

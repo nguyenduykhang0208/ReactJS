@@ -70,7 +70,6 @@ class ModalMedicine extends Component {
     render() {
         let { isOpenModal, closeModal } = this.props;
         let { list_medicines } = this.state;
-        console.log('check state: ', this.props.parent_medicines)
         return (
             <Modal
                 isOpen={isOpenModal}

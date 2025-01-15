@@ -31,7 +31,6 @@ class vnpayReturn extends Component {
         // delete params.invoiceId;
         // Gửi params đến backend API
         let res = await vnpay_return(params);
-        console.log('props', this.props)
         if (res) {
             if (res.errCode === 0) {
                 await changeInvoiceStatus({
@@ -52,7 +51,7 @@ class vnpayReturn extends Component {
         }
 
         // Bắt đầu đếm ngược sau khi nhận kết quả
-        // this.startCountdown();
+        this.startCountdown();
     }
 
     startCountdown() {

@@ -49,7 +49,6 @@ class HandBook extends Component {
     render() {
         let { list_news } = this.state;
         let news = list_news?.news;
-        console.log('check news ', news)
         return (
             <div className='section-share section-handBook'>
                 <div className='section-container'>

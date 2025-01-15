@@ -3,57 +3,50 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './TableManageSchedule.scss'
 import * as actions from '../../../store/actions'
-import { getAllSpecialtyPagination, deleteSpecialty } from '../../../services/userService';
+import { getAllSpecialtyPagination, doctorCancelSchedule } from '../../../services/userService';
+import moment from 'moment';
+import { toast } from 'react-toastify';
 
 class TableManageSchedule extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            list_schedule: []
+            list_schedule: {}
         }
     }
 
     componentDidMount() {
-        // this.props.fetchAllUserStart();
-
+        let { doctor_schedules } = this.props;
+        this.setState({
+            list_schedule: doctor_schedules
+        })
     }
 
     componentDidUpdate(prevProps, preState) {
-
-
-    }
-
-    handleDeleteSpecialty = async (specialty) => {
-        let { currentPage, perPage } = this.props;
-        let res = await deleteSpecialty({ id: specialty.id });
-        if (res && res.errCode === 0) {
-            let result = await getAllSpecialtyPagination(currentPage, perPage, '');
-            if (result && result.data) {
-                this.setState({
-                    listSpecialty: result.data?.specialties
-                })
-            }
-        }
-
-    }
-
-    handleEditSpecialty = (specialty) => {
-        this.props.handleEditSpecialty(specialty);
-    }
-
-    onSearch = async (keyword) => {
-        let { currentPage, perPage } = this.props;
-        let res = await getAllSpecialtyPagination(currentPage, perPage, keyword);
-        if (res && res.data) {
+        if (prevProps.doctor_schedules !== this.props.doctor_schedules) {
             this.setState({
-                listSpecialty: res.data?.specialties
+                list_schedule: this.props.doctor_schedules
             })
         }
     }
 
+
+
+    handleDeleteSchedule = async (schedule) => {
+        let res = await doctorCancelSchedule(schedule.id);
+        if (res) {
+            if (res.errCode === 0)
+                toast.success('Cancel schedule succeed!')
+            await this.props.handleGetDoctorScheduleByDate();
+            if (res.errCode === 1)
+                toast.error('Cancel schedule failed!:' + res.errMessage)
+        }
+    }
+
+
     render() {
-        let listSpecialty = this.state.listSpecialty;
+        let { list_schedule } = this.state;
         return (
             <div className='container'>
                 <div className="table-wrapper">
@@ -74,16 +67,17 @@ class TableManageSchedule extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {listSpecialty && listSpecialty.length > 0 &&
-                                listSpecialty.map((item, index) => {
+                            {list_schedule && list_schedule.length > 0 &&
+                                list_schedule.map((item, index) => {
+                                    let formattedDate = moment(+item.date_time_stamp).format('DD/MM/YYYY');
                                     return (
-                                        <tr key={item.id}>
-                                            <td>{index + 1}</td>
-                                            <td>{item.name}</td>
-                                            <td>{item.descriptionMarkDown}</td>
+                                        <tr key={index}>
+                                            <td>{item.id}</td>
+                                            <td>{formattedDate}</td>
+                                            <td>{item.timeTypeData.value_vi}</td>
                                             <td>
-                                                <button className='my-btn btn-edit' onClick={() => this.handleEditSpecialty(item)}><i className="fas fa-pencil-alt"></i></button>
-                                                {/* <button className='my-btn btn-delete' onClick={() => this.handleDeleteSpecialty(item)}><i className="fas fa-trash"></i></button> */}
+                                                {/* <button className='my-btn btn-edit' onClick={() => this.handleEditSpecialty(item)}><i className="fas fa-pencil-alt"></i></button> */}
+                                                <button className='my-btn btn-delete' onClick={() => this.handleDeleteSchedule(item)}><i className="fas fa-trash"></i></button>
                                             </td>
                                         </tr>
                                     )

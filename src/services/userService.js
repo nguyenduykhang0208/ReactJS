@@ -153,8 +153,8 @@ const editAccount = (data) => {
     return axios.post(`/api/patient-edit-account`, data);
 }
 
-const getAppointmentHistory = (userId) => {
-    return axios.get(`/api/history-appointment?userId=${userId}`);
+const getAppointmentHistory = (page, perPage, userId) => {
+    return axios.get(`/api/history-appointment?page=${page}&perPage=${perPage}&userId=${userId}`);
 }
 
 const getUsersWithPagination = (page, perPage, keyword) => {
@@ -165,6 +165,9 @@ const getRecommendDoctor = (doctorId) => {
     return axios.get(`/api/get-recommend-doctor?doctorId=${doctorId}`)
 }
 
+const getDoctorsByDisease = (keyword, provinceId) => {
+    return axios.get(`/api/get-doctor-by-disease?related_disease=${keyword}&provinceId=${provinceId}`)
+}
 
 const createMedicine = (data) => {
     return axios.post(`/api/create-medicine`, data);
@@ -185,6 +188,10 @@ const deleteMedicine = (id) => {
 
 const cancelAppointment = (id) => {
     return axios.post(`/api/cancel-appointment?id=${id}`);
+}
+
+const doctorConfirmAppointment = (id) => {
+    return axios.post(`/api/doctor-confirm-appointment?id=${id}`);
 }
 
 //get detail booking to create invoice
@@ -220,9 +227,42 @@ const vnpay_return = (queryString) => {
         params: queryString  // Gửi tham số dưới dạng query params
     });
 };
+
+const userChangePassword = (data) => {
+    return axios.post(`/api/user-change-password`, data);
+}
+
+const verifyResetCode = (data) => {
+    return axios.post(`/api/verify-resetCode`, data);
+}
+
+const updateUserPassword = (data) => {
+    return axios.post(`/api/update-user-password`, data);
+}
+
+
+const sendMailForgotPassword = (data) => {
+    return axios.post(`/api/send-mail-forgot-password`, data);
+}
+
+const getGeneralStatistic = () => {
+    return axios.get(`/api/get-general-statistic`);
+}
+
+const getMonthlyRevenue = (month) => {
+    return axios.get(`/api/get-monthly-revenue?months=${month}`);
+}
+
+const getTopDoctorAndRevenue = (month) => {
+    return axios.get(`/api/get-top-doctor-revenue?months=${month}`);
+}
+
+const doctorCancelSchedule = (id) => {
+    return axios.post(`/api/doctor-cancel-schedule?id=${id}`);
+}
 export {
     handleLogin, getDetailBooking,
-    getAllUsers,
+    getAllUsers, doctorCancelSchedule,
     createNewUserService,
     editUserService,
     deleteUserService,
@@ -247,7 +287,7 @@ export {
     sendBill,
     createNews,
     getDetailUser,
-    editAccount,
+    editAccount, doctorConfirmAppointment,
     getAppointmentHistory,
     getAllDoctorsMore,
     getUsersWithPagination,
@@ -261,9 +301,9 @@ export {
     getDetailNews, getRecommendDoctor,
     createMedicine, getAllMedicinePagination,
     editMedicine, deleteMedicine,
-    cancelAppointment,
-    createInvoiceService,
+    cancelAppointment, getDoctorsByDisease,
+    createInvoiceService, getMonthlyRevenue,
     getAllInvoiceByDoctor, changeInvoiceStatus,
-    getDetailInvoice,
-    createPaymentUrl, vnpay_return
+    getDetailInvoice, updateUserPassword, getGeneralStatistic, getTopDoctorAndRevenue,
+    createPaymentUrl, vnpay_return, userChangePassword, verifyResetCode, sendMailForgotPassword
 }

@@ -3,20 +3,28 @@ import { connect } from "react-redux";
 import HomeHeader from '../../HomePage/HomeHeader/HomeHeader'
 import './allClinic.scss'
 import { LANGUAGES } from '../../../utils';
-import { getAllClinic } from '../../../services/userService';
+import { getAllClinicPagination } from '../../../services/userService';
 class allClinic extends Component {
     constructor(props) {
         super(props);
         this.state = {
             clinic_list: [],
             keyToSearch: '',
+            totalPages: 0,
+            perPage: 20,
+            currentPage: 1,
+            totalItems: 0
         }
     }
     async componentDidMount() {
-        let res = await getAllClinic();
+        let { currentPage, perPage } = this.state;
+        let res = await getAllClinicPagination(currentPage, perPage, '');
         if (res && res.errCode === 0) {
             this.setState({
-                clinic_list: res.data
+                clinic_list: res.data,
+                totalPages: res.data?.totalPages,
+                currentPage: res.data?.currentPage,
+                totalItems: res.data?.totalItems,
             })
         }
     }
@@ -26,9 +34,17 @@ class allClinic extends Component {
         copyState[id] = event.target.value;
         this.setState({
             ...copyState
-        }, () => {
-            let { currentPage, perPage, position, keyToSearch, provinceId } = this.state
-            this.getAllDataDoctor(currentPage, perPage, keyToSearch, position, provinceId);
+        }, async () => {
+            let { currentPage, perPage, keyToSearch } = this.state
+            let res = await getAllClinicPagination(currentPage, perPage, keyToSearch);
+            if (res && res.errCode === 0) {
+                this.setState({
+                    clinic_list: res.data,
+                    totalPages: res.data?.totalPages,
+                    currentPage: res.data?.currentPage,
+                    totalItems: res.data?.totalItems,
+                })
+            }
         })
     }
 
@@ -45,20 +61,23 @@ class allClinic extends Component {
     }
 
     render() {
-        let { clinic_list } = this.state;
+        let { clinic_list, keyToSearch } = this.state;
         let { language } = this.props;
         return (
             <>
                 <HomeHeader isShowBanner={false}></HomeHeader>
                 <div className='all-clinic-container'>
                     <div className="header-search">
-                        <input type="text" className="form-control header-search-input" placeholder="Tìm kiếm..." />
+                        <input type="text" className="form-control header-search-input" placeholder="Tìm kiếm..."
+                            value={keyToSearch}
+                            onChange={(event) => this.handleOnChangeInput(event, 'keyToSearch')}
+                        />
                         <button className="btn header-search-btn">
                             <i className="header-search-icon- fas fa-search"></i>
                         </button>
                     </div>
                     <div className='all-clinic-content'>
-                        {clinic_list && clinic_list.length > 0 && clinic_list.map((item, index) => {
+                        {clinic_list?.clinics && clinic_list?.clinics?.length > 0 && clinic_list?.clinics.map((item, index) => {
                             return (
                                 <div className='clinic_item' onClick={() => this.handleViewDetailClinic(item)}>
                                     <div className='clinic_img'

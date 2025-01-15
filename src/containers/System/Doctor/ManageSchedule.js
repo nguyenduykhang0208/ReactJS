@@ -8,6 +8,7 @@ import Select from 'react-select';
 import DatePicker from '../../../components/Input/DatePicker';
 import FormattedDate from '../../../components/Formating/FormattedDate';
 import _ from 'lodash';
+import { getDoctorScheduleByDate } from '../../../services/userService';
 import moment from 'moment';
 import TableManageSchedule from './TableManageSchedule';
 class ManageSchedule extends Component {
@@ -16,6 +17,7 @@ class ManageSchedule extends Component {
         this.state = {
             selectedDoctor: '',
             arrDoctors: [],
+            doctor_schedules: {},
             working_hours: [],
             selectedDate: ''
         }
@@ -92,15 +94,47 @@ class ManageSchedule extends Component {
     handleChange = async (selectedOption) => {
         this.setState({
             selectedDoctor: selectedOption
+        }, async () => {
+            await this.handleGetDoctorScheduleByDate();
         })
     }
 
-    handleOnChangeDatePicker = (date) => {
-        console.log(date)
+    handleGetDoctorScheduleByDate = async () => {
+        let { selectedDoctor, selectedDate, working_hours } = this.state;
+        let reset_selected_working_hours = [...working_hours].map(item => {
+            return { ...item, isSelected: false };
+        });
+        this.setState({
+            working_hours: reset_selected_working_hours
+        })
+        let formattedDate = new Date(selectedDate).getTime();
+        let res = await getDoctorScheduleByDate(selectedDoctor.value, formattedDate)
+        if (res && res.errCode === 0) {
+            this.setState({
+                doctor_schedules: res.data
+            }, () => {
+                let { doctor_schedules, working_hours } = this.state;
+                let copy_working_hours = working_hours;
+                copy_working_hours.forEach((item) => {
+                    let check = doctor_schedules.some(schedule => schedule.timeType === item.keyMap);
+                    if (check) {
+                        item.isSelected = true;
+                    }
+                })
+                this.setState({
+                    working_hours: copy_working_hours
+                })
+                console.log('check working hours: ', working_hours)
+            })
+        }
+    }
+    handleOnChangeDatePicker = async (date) => {
         this.setState({
             selectedDate: date[0]
         })
+        await this.handleGetDoctorScheduleByDate();
     }
+
     handleOnClickScheduleTime = (selectedItem) => {
         let { working_hours } = this.state;
         if (working_hours && working_hours.length > 0) {
@@ -142,15 +176,31 @@ class ManageSchedule extends Component {
                     date: selectedDate,
                     date_time_stamp: formatedDate
                 });
+                await this.handleGetDoctorScheduleByDate();
             } else {
                 alert('Please select time!')
             }
         }
     }
+
+    handleSelectAll = (event) => {
+        const { working_hours } = this.state;
+        const isSelected = event.target.checked;
+
+        const updatedScheduleTime = working_hours.map(item => ({
+            ...item,
+            isSelected: isSelected
+        }));
+
+        this.setState({
+            working_hours: updatedScheduleTime
+        });
+    };
     render() {
         const { language, user } = this.props;
         let schedule_time = this.state.working_hours;
         let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+        console.log('check state: ', this.state)
         return (
             <div className='manage-schedule-container'>
                 <div className='title'>
@@ -193,6 +243,18 @@ class ManageSchedule extends Component {
                                 )
                             })}
                     </div>
+                    <div className='col-12 my-3'>
+                        <div className="select-all-container">
+                            <input
+                                className='form-check-input'
+                                type="checkbox"
+                                id="select-all"
+                                onChange={this.handleSelectAll}
+                                checked={schedule_time.every(item => item.isSelected)}  // Kiểm tra tất cả các item có được chọn không
+                            />
+                            <label htmlFor="select-all">Chọn tất cả</label>
+                        </div>
+                    </div>
                     <div className='col-12'>
                         <button
                             onClick={() => this.handleSaveSchedule()}
@@ -200,7 +262,10 @@ class ManageSchedule extends Component {
                             <FormattedMessage id='manage-schedule.save' />
                         </button>
                     </div>
-                    <TableManageSchedule />
+                    <TableManageSchedule
+                        doctor_schedules={this.state.doctor_schedules}
+                        handleGetDoctorScheduleByDate={this.handleGetDoctorScheduleByDate}
+                    />
                 </div>
             </div>
         );

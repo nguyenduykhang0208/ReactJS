@@ -6,6 +6,7 @@ import { LANGUAGES } from '../../../utils';
 import { getAllDoctorsMore, getAllCodeService } from '../../../services/userService';
 import * as actions from '../../../store/actions'
 import _ from 'lodash';
+import ReactPaginate from 'react-paginate';
 
 class allDoctor extends Component {
     constructor(props) {
@@ -22,6 +23,15 @@ class allDoctor extends Component {
             currentPage: 1,
             totalItems: 0
         }
+    }
+
+    handlePageClick = async (event) => {
+        let { perPage, position, provinceId, keyToSearch } = this.state;
+        this.setState({
+            currentPage: event.selected + 1
+        }, async () => {
+            await this.getAllDataDoctor(event.selected + 1, perPage, keyToSearch, position, provinceId)
+        })
     }
 
     getAllDataDoctor = async (page, perPage, keyToSearch, positionId, provinceId) => {
@@ -112,7 +122,7 @@ class allDoctor extends Component {
         let { doctorId_list, position, listProvince, keyToSearch } = this.state;
         let { language } = this.props;
         let positions = this.state.positionArr;
-        console.log('check state', position)
+        let { currentPage, perPage, totalPages } = this.state
         return (
             <>
                 <HomeHeader isShowBanner={false}></HomeHeader>
@@ -144,7 +154,7 @@ class allDoctor extends Component {
                                 }
                             </select>
                         </div>
-                        <div className='col-3 my-3'>
+                        <div className='col-3'>
                             <select className='form-select' onChange={(event) => this.handleOnChangeSelect(event)}>
                                 {listProvince && listProvince.length > 0 && listProvince.map((item, index) => {
                                     return (
@@ -154,23 +164,47 @@ class allDoctor extends Component {
                             </select>
                         </div>
                     </div>
-
-                    {doctorId_list && doctorId_list.length > 0 && doctorId_list.map((item, index) => {
-                        let doctorName = language === LANGUAGES.VI ? `${item.lastName} ${item.firstName}` : `${item.firstName} ${item.lastName}`;
-                        return (
-                            <div className='all-doctor-content' onClick={() => this.handleViewDetailDoctor(item)}>
-                                <div className='doctor_img' style={{ backgroundImage: `url(${item.image})` }}></div>
-                                <div className='doctor_info'>
-                                    <div className='doctor_name'>{doctorName}</div>
-                                    <div className='doctor_position'>Học vị: {language === LANGUAGES.VI ? item?.positionData?.value_vi : item?.positionData?.value_en}</div>
-                                    <div className='doctor_specialty'>
-                                        Chuyên khoa: {language === LANGUAGES.VI ? item?.Doctor?.specialtyData.name : item?.Doctor?.clinicData.name}
+                    <div className='doctor-list'>
+                        {doctorId_list && doctorId_list.length > 0 && doctorId_list.map((item, index) => {
+                            let doctorName = language === LANGUAGES.VI ? `${item.lastName} ${item.firstName}` : `${item.firstName} ${item.lastName}`;
+                            return (
+                                <div className='all-doctor-content' onClick={() => this.handleViewDetailDoctor(item)}>
+                                    <div className='doctor_img' style={{ backgroundImage: `url(${item.image})` }}></div>
+                                    <div className='doctor_info'>
+                                        <div className='doctor_name'>{doctorName}</div>
+                                        <div className='doctor_position'>Học vị: {language === LANGUAGES.VI ? item?.positionData?.value_vi : item?.positionData?.value_en}</div>
+                                        <div className='doctor_specialty'>
+                                            Chuyên khoa: {language === LANGUAGES.VI ? item?.Doctor?.specialtyData.name : item?.Doctor?.clinicData.name}
+                                        </div>
+                                        <div className='doctor_intro'>{item?.Doctor?.description}</div>
                                     </div>
-                                    <div className='doctor_intro'>{item?.Doctor?.description}</div>
                                 </div>
-                            </div>
-                        )
-                    })}
+                            )
+                        })}
+                    </div>
+
+                    <ReactPaginate
+                        nextLabel="next >"
+                        onPageChange={(event) => { this.handlePageClick(event) }}
+                        pageRangeDisplayed={3}
+                        marginPagesDisplayed={2}
+                        pageCount={totalPages}
+                        forcePage={currentPage - 1}
+                        initialPage={currentPage - 1}
+                        previousLabel="< previous"
+                        pageClassName="page-item"
+                        pageLinkClassName="page-link"
+                        previousClassName="page-item"
+                        previousLinkClassName="page-link"
+                        nextClassName="page-item"
+                        nextLinkClassName="page-link"
+                        breakLabel="..."
+                        breakClassName="page-item"
+                        breakLinkClassName="page-link"
+                        containerClassName="pagination"
+                        activeClassName="active"
+                        renderOnZeroPageCount={null}
+                    />
                 </div>
             </>
         );

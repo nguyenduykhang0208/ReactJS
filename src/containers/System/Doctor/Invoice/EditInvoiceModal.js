@@ -90,7 +90,6 @@ class EditInvoiceModal extends Component {
     render() {
         let { isOpenModal, closeEditInvoiceModal, invoice, language } = this.props;
         let { listStatus } = this.state;
-        console.log('check state: ', this.state)
         return (
             <Modal
                 isOpen={isOpenModal}

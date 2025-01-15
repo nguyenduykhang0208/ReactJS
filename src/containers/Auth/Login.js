@@ -72,54 +72,53 @@ class Login extends Component {
 
         return (
             <div className='login-background'>
-                <CustomScrollbars>
-                    <div className='login-container'>
-                        <div className='auth-form'>
-                            <p className='auth-form__title'>Login</p>
-                            <div className='auth-form__group'>
-                                <label htmlFor="username" className="auth-form__label" >Username</label>
-                                <input
-                                    id='username'
-                                    className='auth-form__input'
-                                    type='text'
-                                    placeholder='Type your username'
-                                    value={this.state.username}
-                                    onChange={(event) => this.handleOnChangeInput(event)}
-                                    onKeyDown={(event) => this.handleEnterPress(event)}
-                                ></input>
-                                <span className='form__input-wrap'>
-                                    <i className="form__input-wrap-icon far fa-user"></i>
+                <div className='login-container'>
+                    <div className='auth-form'>
+                        <p className='auth-form__title'>Login</p>
+                        <div className='auth-form__group'>
+                            <label htmlFor="username" className="auth-form__label" >Username</label>
+                            <input
+                                id='username'
+                                className='auth-form__input'
+                                type='text'
+                                placeholder='Type your username'
+                                value={this.state.username}
+                                onChange={(event) => this.handleOnChangeInput(event)}
+                                onKeyDown={(event) => this.handleEnterPress(event)}
+                            ></input>
+                            <span className='form__input-wrap'>
+                                <i className="form__input-wrap-icon far fa-user"></i>
+                            </span>
+                        </div>
+                        <div className='auth-form__group'>
+                            <label htmlFor="form-password" className="auth-form__label" >Password</label>
+                            <input id='form-password' className='auth-form__input' type={this.state.isShowPassword ? 'text' : 'password'} placeholder='Type your password'
+                                value={this.state.password}
+                                onChange={(event) => this.handleOnChangeInput(event)}
+                                onKeyDown={(event) => this.handleEnterPress(event)}
+                            ></input>
+                            <span className='form__input-wrap'>
+                                <i className="form__input-wrap-icon fas fa-lock"></i>
+                                <span className=' show-pwd-icon' onClick={() => { this.handleShowHidePassword() }}>
+                                    <i className={`${this.state.isShowPassword ? "far fa-eye-slash" : " fas fa-eye"} `}></i>
                                 </span>
+                                {/* <i class="hide-pwd-icon  far fa-eye-slash"></i> */}
+                            </span>
+                        </div>
+                        <div className='auth-form__aside'>
+                            <Link className='auth-form__aside-forgot-pwd' to='/forgot-password'>Forgot password?</Link>
+                        </div>
+                        <div className='col-12' style={{ color: 'red' }}>
+                            {this.state.errMessage}
+                        </div>
+                        <div className='auth-form__controls'>
+                            <div className='wrap-login-btn'>
+                                <button className="btn btn-login" onClick={() => { this.handleLogin() }}>Login</button>
+                                <div className='btn-login--background'></div>
                             </div>
-                            <div className='auth-form__group'>
-                                <label htmlFor="form-password" className="auth-form__label" >Password</label>
-                                <input id='form-password' className='auth-form__input' type={this.state.isShowPassword ? 'text' : 'password'} placeholder='Type your password'
-                                    value={this.state.password}
-                                    onChange={(event) => this.handleOnChangeInput(event)}
-                                    onKeyDown={(event) => this.handleEnterPress(event)}
-                                ></input>
-                                <span className='form__input-wrap'>
-                                    <i className="form__input-wrap-icon fas fa-lock"></i>
-                                    <span className=' show-pwd-icon' onClick={() => { this.handleShowHidePassword() }}>
-                                        <i className={`${this.state.isShowPassword ? "far fa-eye-slash" : " fas fa-eye"} `}></i>
-                                    </span>
-                                    {/* <i class="hide-pwd-icon  far fa-eye-slash"></i> */}
-                                </span>
-                            </div>
-                            <div className='auth-form__aside'>
-                                <a className='auth-form__aside-forgot-pwd' href='/'>Forgot password?</a>
-                            </div>
-                            <div className='col-12' style={{ color: 'red' }}>
-                                {this.state.errMessage}
-                            </div>
-                            <div className='auth-form__controls'>
-                                <div className='wrap-login-btn'>
-                                    <button className="btn btn-login" onClick={() => { this.handleLogin() }}>Login</button>
-                                    <div className='btn-login--background'></div>
-                                </div>
-                            </div>
-                            <p className='socials-login-text text-center'>Or Sign Up Using</p>
-                            <div className='auth-form__socials'>
+                        </div>
+                        {/* <p className='socials-login-text text-center'>Or Sign Up Using</p> */}
+                        {/* <div className='auth-form__socials'>
                                 <a className='auth-form__socials-link'>
                                     <i className="form-socials-icon form-socials--google fab fa-google"></i>
                                 </a>
@@ -129,13 +128,12 @@ class Login extends Component {
                                 <a className='auth-form__socials-link'>
                                     <i className="form-socials-icon form-socials--twitter fab fa-twitter"></i>
                                 </a>
-                            </div>
-                            <div className='auth-form__footer'>
-                                <p>Have an account? <Link to='/sign-up'>Sign up</Link></p>
-                            </div>
+                            </div> */}
+                        <div className='auth-form__footer'>
+                            <p>Have an account? <Link to='/sign-up'>Sign up</Link></p>
                         </div>
                     </div>
-                </CustomScrollbars>
+                </div>
             </div >
         )
     }

@@ -9,6 +9,8 @@ import * as actions from '../../../store/actions'
 import DatePicker from '../../../components/Input/DatePicker';
 import { toast } from 'react-toastify';
 import moment from 'moment';
+import Lightbox from 'react-image-lightbox';
+
 class myAccount extends Component {
     constructor(props) {
         super(props);
@@ -21,11 +23,13 @@ class myAccount extends Component {
             phoneNumber2: '',
             firstName: '',
             lastName: '',
-            listGender: []
+            listGender: [],
+            previewImgUrl: '',
+            avatar: '',
+            isOpen: false
         }
     }
-    async componentDidMount() {
-        this.props.fetchGenderStart();
+    getUserData = async () => {
         let userInfo = this.props.userInfo;
         if (userInfo && userInfo.id) {
             let res = await getDetailUser(userInfo.id);
@@ -41,10 +45,15 @@ class myAccount extends Component {
                     phoneNumber2: data?.patientData?.phoneNumber2 ?? '',
                     firstName: data?.firstName ?? '',
                     lastName: data?.lastName ?? '',
+                    previewImgUrl: new Buffer(data?.image, 'base64').toString('binary'),
                     gender: data.gender
                 })
             }
         }
+    }
+    async componentDidMount() {
+        this.props.fetchGenderStart();
+        await this.getUserData();
     }
 
     async componentDidUpdate(prevProps, preState) {
@@ -56,25 +65,27 @@ class myAccount extends Component {
             })
         }
         if (prevProps.userInfo?.id !== this.props.userInfo?.id) {
-            let userInfo = this.props.userInfo;
-            if (userInfo && userInfo.id) {
-                let res = await getDetailUser(userInfo.id);
-                if (res && res.errCode === 0) {
-                    let data = res.user;
-                    // let birthDay = CommonUtils.convertToISOString(data?.patientData?.birthDay);
-                    let birthDay = new Date(data?.patientData?.birthDay);
-                    this.setState({
-                        note: data?.patientData?.note ?? '',
-                        birthDay: birthDay ?? '',
-                        address: data?.address ?? '',
-                        phoneNumber: data?.phoneNumber ?? '',
-                        phoneNumber2: data?.patientData?.phoneNumber2 ?? '',
-                        firstName: data?.firstName ?? '',
-                        lastName: data?.lastName ?? '',
-                        gender: data.gender
-                    })
-                }
-            }
+            await this.getUserData();
+        }
+    }
+
+    openPreviewImage = () => {
+        if (!this.state.previewImgUrl) return;
+        this.setState({
+            isOpen: true
+        })
+    }
+
+    handleOnChangeImage = async (event) => {
+        let data = event.target.files;
+        let file = data[0];
+        if (file) {
+            let base64 = await CommonUtils.getBase64(file);
+            let objectUrl = URL.createObjectURL(file);
+            this.setState({
+                previewImgUrl: objectUrl,
+                avatar: base64
+            })
         }
     }
 
@@ -94,13 +105,14 @@ class myAccount extends Component {
 
     handleConfirm = async () => {
         let date = this.state.birthDay;
-        let birthDay = moment(date).format('DD/MM/YYYY');
+        let birthDay = moment(date).format('YYYY-MM-DD HH:mm:ss');
         let res = await editAccount({
             id: this.props?.userInfo?.id,
             note: this.state.note,
             birthDay: birthDay,
             address: this.state.address,
             gender: this.state.gender,
+            image: this.state.avatar,
             phoneNumber: this.state.phoneNumber,
             phoneNumber2: this.state.phoneNumber2,
             firstName: this.state.firstName,
@@ -108,12 +120,24 @@ class myAccount extends Component {
         })
         if (res && res.errCode === 0) {
             toast.success('Cập nhật thông tin thành công')
+            let res = await getDetailUser(this.props?.userInfo?.id);
+            if (res && res.errCode === 0) {
+                let data = res?.user;
+                await this.props.userLoginSuccess({
+                    id: data.id,
+                    email: data.email,
+                    roleId: data.roleId,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    image: new Buffer(data?.image, 'base64').toString('binary')
+                });
+            }
+
         }
     }
     render() {
         let language = this.props.language;
         let { gender, listGender } = this.state;
-        console.log('check state in myAccount:', this.state)
         return (
             <>
                 <HomeHeader isShowBanner={false}></HomeHeader>
@@ -219,15 +243,38 @@ class myAccount extends Component {
 
                                 ></textarea>
                             </div>
+                            <div className="col-4">
+                                <label htmlFor="user-image"><FormattedMessage id="manage-user.image" /></label>
+                                <div className='user-avatar'>
+                                    <input
+                                        onChange={(event) => this.handleOnChangeImage(event)}
+                                        id='upload-image' type='file' hidden />
+                                    <label className='label-upload' htmlFor='upload-image'>Tải ảnh <i className='fas fa-upload'></i></label>
+                                    <div
+                                        className='preview-image'
+                                        style={{ backgroundImage: `url(${this.state.previewImgUrl})` }}
+                                        onClick={() => this.openPreviewImage()}
+                                    >
+
+                                    </div>
+                                </div>
+                            </div>
                             <div className='col-12 my-3'>
                                 <button className=' btn btn-primary' onClick={() => this.handleConfirm()}>
                                     <FormattedMessage id='patient.my-account.save' />
 
                                 </button>
                             </div>
+
                         </div>
                     </div>
                 </div>
+                {this.state.isOpen && (
+                    <Lightbox
+                        mainSrc={this.state.previewImgUrl}
+                        onCloseRequest={() => this.setState({ isOpen: false })}
+                    />
+                )}
             </>
         );
     }
@@ -244,6 +291,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchGenderStart: () => dispatch(actions.fetchGenderStart()),
+        userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo)),
     };
 };
 

@@ -6,6 +6,8 @@ import * as actions from '../../../../store/actions'
 import SearchControl from '../../../../components/Search/SearchControl';
 import { getAllMedicinePagination, editMedicine, deleteMedicine } from '../../../../services/userService';
 import moment from 'moment';
+import NumberFormat from 'react-number-format';
+
 class TableManageMedicine extends Component {
 
     constructor(props) {
@@ -92,7 +94,13 @@ class TableManageMedicine extends Component {
                                             <td>{index + 1}</td>
                                             <td>{item.name}</td>
                                             <td>{item.description}</td>
-                                            <td>{item.price}</td>
+                                            <td>
+                                                <NumberFormat
+                                                    value={item.price}
+                                                    displayType='text'
+                                                    thousandSeparator
+                                                />
+                                            </td>
                                             <td>
                                                 <button className='my-btn btn-edit' onClick={() => this.handleEditMedicine(item)}><i className="fas fa-pencil-alt"></i></button>
                                                 <button className='my-btn btn-delete' onClick={() => this.handleDeleteMedicine(item)}><i className="fas fa-trash"></i></button>

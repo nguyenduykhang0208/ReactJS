@@ -249,10 +249,10 @@ class ManageClinic extends Component {
 
 
     handleEditClinic = async (clinic) => {
-        let base64Img = '';
-        if (clinic.image) {
-            base64Img = new Buffer(clinic.image, 'base64').toString('binary');
-        }
+        // let base64Img = '';
+        // if (clinic.image) {
+        //     base64Img = new Buffer(clinic.image, 'base64').toString('binary');
+        // }
         this.setState({
             clinicEditId: clinic.id,
             clinic_name: clinic.name,
@@ -260,7 +260,7 @@ class ManageClinic extends Component {
             clinic_image: '',
             descriptionHTML: clinic.descriptionHTML,
             descriptionMarkDown: clinic.descriptionMarkDown,
-            previewImgUrl: base64Img,
+            previewImgUrl: clinic.image,
             action: manageActions.EDIT
         })
 

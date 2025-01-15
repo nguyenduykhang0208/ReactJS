@@ -11,7 +11,11 @@ class HomeHeader extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isShowSideMenu: false
+            isShowSideMenu: false,
+        }
+    }
+    async componentDidUpdate(prevProps, preState) {
+        if (prevProps.user !== this.props.user) {
         }
     }
 
@@ -42,7 +46,6 @@ class HomeHeader extends Component {
         let language = this.props.language;
         let { user, processLogout } = this.props;
         let userName = user ? `${user.firstName} ${user.lastName}` : '';
-        console.log('check user', this.props.user)
         return (
             <React.Fragment>
                 <div className='home-header-container'>
@@ -55,6 +58,7 @@ class HomeHeader extends Component {
                                 <li><NavLink to="/all-clinics" activeClassName="active-link"><FormattedMessage id='home-header.clinic' /></NavLink></li>
                                 <li><NavLink to="/all-specialty" activeClassName="active-link"><FormattedMessage id='home-header.specialty' /></NavLink></li>
                                 <li><NavLink to="/news" activeClassName="active-link"><FormattedMessage id='home-header.news' /></NavLink></li>
+                                <li><NavLink to="/find-doctor-by-disease" activeClassName="active-link"><FormattedMessage id='home-header.find-doctor' /></NavLink></li>
                             </ul>
                         </div>
                         {/* <div className='center-content'>
@@ -86,6 +90,9 @@ class HomeHeader extends Component {
                                             </li>
                                             <li className="header__navbar-user-item">
                                                 <Link to="/history-patient">Lịch sử khám</Link>
+                                            </li>
+                                            <li className="header__navbar-user-item">
+                                                <Link to="/reset-password">Đổi mật khẩu</Link>
                                             </li>
                                             <li className="header__navbar-user-item header__navbar-user-item--seperate">
                                                 <span onClick={processLogout}>Đăng xuất</span>

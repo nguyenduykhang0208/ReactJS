@@ -12,7 +12,8 @@
     "fee": "Checkup package",
     "check-health": "General health check",
     "support": "Support",
-    "welcome": "Welcome, "
+    "welcome": "Welcome, ",
+    "find-doctor": "Find doctor"
   },
   "banner": {
     "title1": "MEDICAL PLATFORM",
@@ -49,14 +50,16 @@
       "dash-board": "DashBoard",
       "income": "Income",
       "medicine": "Medicine",
-      "manage-medicine": "Manage Medicine",
-      "manage-type-medicine": "Type of Medicine",
+      "manage-medicine": "Manage medicine",
+      "manage-type-medicine": "Type of medicine",
       "invoice": "Invoice",
-      "manage-invoice": "Manage Invoice"
+      "manage-invoice": "Manage invoice"
     },
     "doctor": {
       "manage-schedule": "Manage doctor's schedule",
-      "manage-patient": "Manage patient"
+      "manage-patient": "Manage patient",
+      "manage-invoice": "Manage invoice",
+      "list-invoice": "List invoice"
     }
   },
   "manage-user": {

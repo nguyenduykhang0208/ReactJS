@@ -1,0 +1,104 @@
+.analyst-container {
+    .general__dashboard {
+        margin: 10px 0;
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+
+        .box {
+            border-radius: 10px;
+            background-color: #fafafa;
+            display: flex;
+            width: 270px;
+            height: 190px;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+
+            .left-content {
+                width: 80%;
+
+                .box__title {
+                    font-size: 20px;
+                    font-weight: 500;
+                }
+
+                .box__number {
+                    font-weight: 500;
+                }
+
+            }
+
+            .right-content {
+                width: 20%;
+
+                .box_img {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    margin: auto;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                }
+
+                .user_img {
+                    background-image: url('../../../../assets/images/dashboard/user.png');
+                }
+
+                .doctor_img {
+                    background-image: url('../../../../assets/images/dashboard/doctor.png');
+                }
+
+                .facility_img {
+                    background-image: url('../../../../assets/images/dashboard/facility.png');
+                }
+
+                .specialty_img {
+                    background-image: url('../../../../assets/images/dashboard/specialty.png');
+                }
+            }
+
+        }
+    }
+
+    .revenue__container {
+        margin-top: 30px;
+
+        p {
+            text-align: center;
+        }
+    }
+
+    .top-doctor__container {
+        padding: 20px 0;
+        border-top: 1px solid #ccc;
+
+        .heading-text {
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .doctor_chart {
+            display: flex;
+            justify-content: center;
+
+            .left-chart {
+                text-align: center;
+
+                p {
+                    margin-top: 10px;
+                }
+            }
+
+            .right-chart {
+                text-align: center;
+
+                p {
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+
+}

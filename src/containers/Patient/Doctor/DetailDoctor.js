@@ -20,8 +20,9 @@ class DetailDoctor extends Component {
             let id = this.props.match.params.id;
             this.setState({
                 currentDoctorId: id
+            }, async () => {
+                await this.props.getDetailDoctorStart(id);
             })
-            await this.props.getDetailDoctorStart(id);
         }
     }
 
@@ -35,8 +36,9 @@ class DetailDoctor extends Component {
             let id = this.props.match.params.id;
             this.setState({
                 currentDoctorId: id
+            }, async () => {
+                await this.props.getDetailDoctorStart(id);
             })
-            await this.props.getDetailDoctorStart(id);
         }
     }
     render() {
@@ -47,7 +49,6 @@ class DetailDoctor extends Component {
             nameVi = `${detailDoctor.positionData.value_vi}, ${detailDoctor.lastName} ${detailDoctor.firstName}`
             nameEn = `${detailDoctor.positionData.value_en}, ${detailDoctor.firstName} ${detailDoctor.lastName}`
         }
-        console.log('detailDoctor', detailDoctor)
         return (
             <>
                 <HomeHeader isShowBanner={false}></HomeHeader>

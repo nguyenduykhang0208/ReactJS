@@ -108,7 +108,20 @@ class Specialty extends Component {
                     <div className='specialty-content'>
                         {detail_specialty && !_.isEmpty(detail_specialty)
                             &&
-                            <div dangerouslySetInnerHTML={{ __html: detail_specialty.descriptionHTML }}></div>
+                            <>
+                                <div className='specialty-heading'>
+                                    <div className='specialty_thumb'>
+                                        <div className='specialty_info'>
+                                            <div className='specialty_img' style={{ backgroundImage: `url(${detail_specialty?.image})` }}></div>
+                                            <div className='introduce_specialty_wrap'>
+                                                <div className='specialty_name'>Khoa {detail_specialty.name}</div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div dangerouslySetInnerHTML={{ __html: detail_specialty.descriptionHTML }}></div>
+                            </>
                         }
                     </div>
                     <div className='specialty_doctor_wrap' >

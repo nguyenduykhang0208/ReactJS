@@ -102,7 +102,6 @@ class DoctorSchedule extends Component {
     render() {
         let { allDays, doctor_schedules, selectedSchedule } = this.state;
         let language = this.props.language;
-        console.log('check state schedule: ', this.props)
         return (
             <>
                 <div className='doctor-schedule-container'>

@@ -112,5 +112,13 @@ export const doctorMenu = [
                 name: 'menu.admin.manage-news', link: '/system/manage-news'
             }
         ]
+    },
+    { //Quản lý tin tức
+        name: 'menu.admin.analyst', menus: [
+            {
+                name: 'menu.admin.dash-board', link: '/system/show-dashboard'
+            }
+        ]
+
     }
 ];

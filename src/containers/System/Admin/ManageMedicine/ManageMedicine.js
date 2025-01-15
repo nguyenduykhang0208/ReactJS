@@ -307,20 +307,22 @@ class ManageMedicine extends Component {
         let copyState = { ...this.state };
         copyState[id] = date[0];
 
-        if (id === 'expire' && this.state.production_date && date[0] <= this.state.production_date) {
-            alert('Ngày hết hạn phải lớn hơn ngày sản xuất.');
-            return; // Không cập nhật nếu điều kiện không thỏa mãn
-        }
         this.setState({
             ...copyState
         })
     }
+
+    handleOnBlurDatePicker = () => {
+        const { production_date, expire } = this.state;
+        if (expire && production_date && expire <= production_date) {
+            alert('Ngày hết hạn phải lớn hơn ngày sản xuất.');
+        }
+    };
     render() {
         let language = this.props.language;
         let { currentPage, perPage, totalPages } = this.state
         let { name, expire, production_date, price, quantity, image, description } = this.state;
         let yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
-        console.log(yesterday)
         return (
             <div className='user-container'>
                 <div className='title'>
@@ -372,13 +374,16 @@ class ManageMedicine extends Component {
                                 <DatePicker
                                     onChange={(date) => this.handleOnChangeDatePicker(date, 'production_date')}
                                     className='form-control'
+                                    onBlur={this.handleOnBlurDatePicker}
                                     value={this.state.production_date}
+                                    maxDate={this.state.expire || new Date()}
                                 />
                             </div>
                             <div className="col-4">
                                 <label htmlFor="firstName"><FormattedMessage id="admin.manage-medicine.expire" /></label>
                                 <DatePicker
                                     onChange={(date) => this.handleOnChangeDatePicker(date, 'expire')}
+                                    onBlur={this.handleOnBlurDatePicker}
                                     className='form-control'
                                     value={this.state.expire}
                                     minDate={yesterday}

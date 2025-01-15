@@ -200,6 +200,7 @@ class ManageDoctor extends Component {
 
     handleSaveContentMarkdown = () => {
         let { hasOldData } = this.state;
+        console.log('check state: ', this.state)
         this.props.saveDetailDoctor({
             html_content: this.state.contentHTML,
             markdown_content: this.state.contentMarkdown,
@@ -294,7 +295,7 @@ class ManageDoctor extends Component {
                                 placeholder={<FormattedMessage id='admin.manage-doctor.province' />}
                             />
                         </div>
-                        <div className='col-4 form-group'>
+                        {/* <div className='col-4 form-group'>
                             <label><FormattedMessage id='admin.manage-doctor.nameClinic' /></label>
                             <input
                                 className='form-control'
@@ -309,7 +310,7 @@ class ManageDoctor extends Component {
                                 onChange={(event) => this.handleOnChangeText(event, 'addressClinic')}
                                 value={this.state.addressClinic}
                             />
-                        </div>
+                        </div> */}
                         <div className='col-4 form-group'>
                             <label><FormattedMessage id='admin.manage-doctor.note' /></label>
                             <input

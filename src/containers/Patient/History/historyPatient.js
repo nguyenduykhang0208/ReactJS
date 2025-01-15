@@ -9,23 +9,53 @@ import moment from 'moment';
 import ConfirmModal from '../../../components/ConfirmModal';
 import * as actions from '../../../store/actions'
 import { toast } from 'react-toastify';
+import ReactPaginate from 'react-paginate';
 
 class historyPatient extends Component {
     constructor(props) {
         super(props);
         this.state = {
             appointments: [],
-            isOpen: false
+            isOpen: false,
+            totalPages: 0,
+            perPage: 5,
+            currentPage: 1,
+            totalItems: 0
         }
+    }
+
+    handlePageClick = async (event) => {
+        let { perPage } = this.state;
+        let { userInfo } = this.props;
+        if (!userInfo || !userInfo.id) {
+            return;
+        }
+        this.setState({
+            currentPage: event.selected + 1
+        }, async () => {
+            let res = await getAppointmentHistory(event.selected + 1, perPage, userInfo.id)
+            if (res && res.errCode === 0) {
+                this.setState({
+                    appointments: res.data?.bookings,
+                    totalPages: res.data?.totalPages,
+                    currentPage: res.data?.currentPage,
+                    totalItems: res.data?.totalItems,
+                })
+            }
+        })
     }
 
     getAppointment = async () => {
         let { userInfo } = this.props;
+        let { currentPage, perPage } = this.state;
         if (userInfo && userInfo.id) {
-            let res = await getAppointmentHistory(userInfo.id);
+            let res = await getAppointmentHistory(currentPage, perPage, userInfo.id);
             if (res && res.errCode === 0) {
                 this.setState({
-                    appointments: res.data
+                    appointments: res.data?.bookings,
+                    totalPages: res.data?.totalPages,
+                    currentPage: res.data?.currentPage,
+                    totalItems: res.data?.totalItems,
                 })
             }
         }
@@ -35,9 +65,9 @@ class historyPatient extends Component {
     }
 
     async componentDidUpdate(prevProps, preState) {
-        if (prevProps.userInfo !== this.props.userInfo) {
-            await this.getAppointment();
-        }
+        // if (prevProps.userInfo !== this.props.userInfo) {
+        //     await this.getAppointment();
+        // }
     }
 
     viewDetailInvoice = (item) => {
@@ -75,7 +105,9 @@ class historyPatient extends Component {
     }
     render() {
         let { appointments } = this.state;
-        console.log('check', this.state);
+        let { userInfo } = this.props;
+        let { currentPage, perPage, totalPages } = this.state
+
         return (
             <>
                 <HomeHeader isShowBanner={false}></HomeHeader>
@@ -131,6 +163,30 @@ class historyPatient extends Component {
                                 }
                             </tbody>
                         </table>
+                        {userInfo && userInfo?.id &&
+                            <ReactPaginate
+                                nextLabel="next >"
+                                onPageChange={(event) => { this.handlePageClick(event) }}
+                                pageRangeDisplayed={3}
+                                marginPagesDisplayed={2}
+                                pageCount={totalPages}
+                                forcePage={currentPage - 1}
+                                initialPage={currentPage - 1}
+                                previousLabel="< previous"
+                                pageClassName="page-item"
+                                pageLinkClassName="page-link"
+                                previousClassName="page-item"
+                                previousLinkClassName="page-link"
+                                nextClassName="page-item"
+                                nextLinkClassName="page-link"
+                                breakLabel="..."
+                                breakClassName="page-item"
+                                breakLinkClassName="page-link"
+                                containerClassName="pagination"
+                                activeClassName="active"
+                                renderOnZeroPageCount={null}
+                            />
+                        }
                     </div >
                 </div >
                 <ConfirmModal />

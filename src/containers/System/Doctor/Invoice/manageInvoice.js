@@ -12,9 +12,11 @@ import { toast } from 'react-toastify';
 import moment, { lang } from 'moment';
 import EditInvoiceModal from './EditInvoiceModal';
 import Select from 'react-select';
+import DetailInvoice from './detailInvoice';
+import ForwardedPrintInvoice from './printInvoice';
 import * as actions from '../../../../store/actions'
-
-class createInvoice extends Component {
+import ReactToPrint from 'react-to-print';
+class manageInvoice extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,7 +28,9 @@ class createInvoice extends Component {
             list_status: [],
             selectedDate: moment(new Date()).add(0, 'days').startOf('day').valueOf(),
             isOpenModal: false,
-            is_doctor_login: ''
+            isOpenDetailModal: false,
+            is_doctor_login: '',
+            invoiceToPrint: ''
         }
     }
 
@@ -167,11 +171,30 @@ class createInvoice extends Component {
         this.getAllInvoiceData();
     }
 
+
+    openDetailInvoiceModal = (item) => {
+        this.setState({
+            isOpenDetailModal: true,
+            invoice: item
+        })
+    }
+
+    closeDetailInvoiceModal = () => {
+        this.setState({
+            isOpenDetailModal: false
+        })
+    }
+
     viewDetailInvoice = (item) => {
         this.props.history.push(`/doctor/detail-invoice?invoiceId=${item.id}`)
     }
+
+    handlePrint = (invoice) => {
+        this.setState({ invoiceToPrint: invoice });
+    }
+
     render() {
-        let { listInvoice, list_status, selectedStatus } = this.state;
+        let { listInvoice, list_status, selectedStatus, invoiceToPrint } = this.state;
         let { language } = this.props;
         return (
             <>
@@ -254,11 +277,10 @@ class createInvoice extends Component {
                                                         {selectedStatus === 'S5' ?
                                                             <>
                                                                 <button className='my-btn btn-warning mx-3' onClick={() => this.openEditInvoiceModal(item)}>Sửa</button>
-                                                                <button className='my-btn btn-primary' onClick={() => this.viewDetailInvoice(item)}>Xem chi tiết</button>
+                                                                <button className='my-btn btn-primary' onClick={() => this.openDetailInvoiceModal(item)}>Xem chi tiết</button>
                                                             </>
                                                             :
-                                                            <button className='my-btn btn-primary' onClick={() => this.viewDetailInvoice(item)}>Xem chi tiết</button>
-
+                                                            <button className='my-btn btn-primary' onClick={() => this.openDetailInvoiceModal(item)}>Xem chi tiết</button>
                                                         }
                                                     </td>
                                                 </tr>
@@ -275,6 +297,12 @@ class createInvoice extends Component {
                     closeEditInvoiceModal={this.closeEditInvoiceModal}
                     invoice={this.state.invoice}
                 />
+                <DetailInvoice
+                    isOpenModal={this.state.isOpenDetailModal}
+                    closeDetailInvoiceModal={this.closeDetailInvoiceModal}
+                    invoice={this.state.invoice}
+                />
+
             </>
         );
     }
@@ -295,4 +323,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(createInvoice);
+export default connect(mapStateToProps, mapDispatchToProps)(manageInvoice);

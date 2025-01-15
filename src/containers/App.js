@@ -31,6 +31,10 @@ import allSpecialty from './Patient/Specialty/allSpecialty';
 import DetailNews from './Patient/News/DetailNews';
 import patientDetailInvoice from './Patient/History/patientDetailInvoice';
 import vnpayReturn from './Patient/History/vnpayReturn';
+import resetPassword from './Patient/Account/resetPassword';
+import forgotPassword from './Auth/forgotPassword';
+import retrievePassword from './Auth/retrievePassword';
+import suggestDoctor from './Patient/SuggestDoctor/suggestDoctor';
 class App extends Component {
 
     handlePersistorState = () => {
@@ -71,6 +75,10 @@ class App extends Component {
                                     <Route path={path.ALL_SPECIALTY} component={allSpecialty} />
                                     <Route path={path.HOMEPAGE} component={HomePage} />
                                     <Route path={path.HISTORY_PATIENT} component={historyPatient} />
+                                    <Route path={path.FIND_DOCTOR} component={suggestDoctor} />
+                                    <Route path={path.RESET_PASSWORD} component={resetPassword} />
+                                    <Route path={path.FORGOT_PASSWORD} component={forgotPassword} />
+                                    <Route path={path.CONFIRM_FORGOT_PWD_CHANGE} component={retrievePassword} />
                                     <Route path={path.NEWS} component={News} />
                                     <Route path={path.MYACCOUNT} component={myAccount} />
                                     <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />

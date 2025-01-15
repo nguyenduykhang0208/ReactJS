@@ -6,6 +6,54 @@
         box-shadow: 0 1px 6px #20212447;
         margin-bottom: 10px;
         padding: 20px 40px;
+
+        .specialty-heading {
+            margin-bottom: 10px;
+
+            .specialty_thumb {
+                width: 100%;
+                height: 250px;
+                background: url('../../../assets/images/medical-facility/background.jpg') no-repeat center center;
+                background-size: cover;
+                position: relative;
+                display: flex;
+                justify-content: center;
+
+                .specialty_info {
+                    background-color: #fdfdfc;
+                    width: 90%;
+                    height: 110px;
+                    position: absolute;
+                    bottom: 0;
+                    display: flex;
+                    align-items: center;
+                    gap: 20px;
+                    box-shadow: 0 1px 6px #ccc;
+                    border: 1px solid #ccc;
+
+                    .specialty_img {
+                        width: 110px;
+                        height: 110px;
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        box-shadow: 0 1px 3px #ccc;
+                        border: 1px solid #ccc;
+                    }
+
+                    .introduce_specialty_wrap {
+                        display: flex;
+                        flex-direction: column;
+
+                        .specialty_name {
+                            font-size: 20px;
+                            font-weight: 600;
+                            padding: 10px 0;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .specialty_doctor_wrap {

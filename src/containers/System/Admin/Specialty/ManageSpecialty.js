@@ -28,6 +28,7 @@ class ManageSpecialty extends Component {
             specialty_image: '',
             descriptionHTML: '',
             descriptionMarkDown: '',
+            related_diseases: '',
             previewImgUrl: '',
             isOpenPreviewImg: false,
 
@@ -155,7 +156,8 @@ class ManageSpecialty extends Component {
                     specialty_name: this.state.specialty_name,
                     specialty_image: this.state.specialty_image,
                     descriptionHTML: this.state.descriptionHTML,
-                    descriptionMarkDown: this.state.descriptionMarkDown
+                    descriptionMarkDown: this.state.descriptionMarkDown,
+                    related_diseases: this.state.related_diseases
                 })
                 if (res && res.errCode === 0) {
                     toast.success('Create new specialty succeed!')
@@ -165,7 +167,8 @@ class ManageSpecialty extends Component {
                         specialty_image: '',
                         descriptionHTML: '',
                         descriptionMarkDown: '',
-                        previewImgUrl: ''
+                        previewImgUrl: '',
+                        related_diseases: ''
                     })
                 }
                 else {
@@ -179,7 +182,8 @@ class ManageSpecialty extends Component {
                     name: this.state.specialty_name,
                     image: this.state.specialty_image,
                     descriptionHTML: this.state.descriptionHTML,
-                    descriptionMarkDown: this.state.descriptionMarkDown
+                    descriptionMarkDown: this.state.descriptionMarkDown,
+                    related_diseases: this.state.related_diseases
                 })
                 if (res && res.errCode === 0) {
                     toast.success('Edit specialty succeed!')
@@ -191,6 +195,7 @@ class ManageSpecialty extends Component {
                         descriptionHTML: '',
                         descriptionMarkDown: '',
                         previewImgUrl: '',
+                        related_diseases: ''
                     })
                 }
                 else {
@@ -208,6 +213,7 @@ class ManageSpecialty extends Component {
                     descriptionHTML: '',
                     descriptionMarkDown: '',
                     previewImgUrl: '',
+                    related_diseases: '',
 
                     list_specialty: res.data,
                     totalPages: res.data?.totalPages,
@@ -231,6 +237,7 @@ class ManageSpecialty extends Component {
             specialty_image: '',
             descriptionHTML: specialty.descriptionHTML,
             descriptionMarkDown: specialty.descriptionMarkDown,
+            related_diseases: specialty.related_diseases ?? '',
             previewImgUrl: base64Img,
             action: manageActions.EDIT
         })
@@ -274,6 +281,17 @@ class ManageSpecialty extends Component {
                                     renderHTML={text => mdParser.render(text)}
                                     onChange={this.handleEditorChange}
                                 />
+                            </div>
+                            <div className='col-12'>
+                                <label htmlFor="username" className="auth-form__label" >
+                                    Các bệnh liên quan
+                                </label>
+                                <textarea
+                                    className='form-control'
+                                    value={this.state.related_diseases}
+                                    onChange={(event) => this.handleOnChangeInput(event, 'related_diseases')}
+
+                                ></textarea>
                             </div>
                             <div className='col-12'>
                                 <button className='btn btn-primary btn-save-specialty'

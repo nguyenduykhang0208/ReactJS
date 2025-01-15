@@ -33,10 +33,12 @@ class BookingModal extends Component {
     async componentDidMount() {
         await this.props.fetchGenderStart();
         let userInfo = this.props.userInfo;
-        this.setState({
-            fullName: userInfo?.lastName + ' ' + userInfo?.firstName,
-            email: userInfo?.email
-        })
+        if (userInfo && !_.isEmpty(userInfo)) {
+            this.setState({
+                fullName: userInfo?.lastName + ' ' + userInfo?.firstName,
+                email: userInfo?.email
+            })
+        }
     }
 
     componentDidUpdate(prevProps, preState) {
@@ -125,14 +127,15 @@ class BookingModal extends Component {
     }
 
     handleConFirmBooking = async () => {
-        let birthDay = new Date(this.state.day_of_birth).getTime();
+        // let birthDay = new Date(this.state.day_of_birth).getTime();
+        let birthDay = moment(this.state.day_of_birth).format('YYYY-MM-DD HH:mm:ss');
         let timeString = this.buildTimeData(this.props.selectedSchedule)
         let timeArr = timeString.split('-');
         let doctorName = this.getDoctorName(this.props.selectedSchedule)
-        let date_booked = timeArr[timeArr.length - 1];
+        let date_booked = moment(timeArr[timeArr.length - 1], 'DD/MM/YYYY').format('YYYY-MM-DD HH:mm:ss');
         let { userInfo } = this.props;
         await this.props.createNewAppointment({
-            patientId: userInfo.id,
+            patientId: userInfo?.id,
             fullName: this.state.fullName,
             phoneNumber: this.state.phoneNumber,
             email: this.state.email,
