@@ -1,68 +1,24 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Giao diện người dùng:
 
-## Available Scripts
++Trang chủ:
+<img width="980" height="516" alt="image" src="https://github.com/user-attachments/assets/08d7d951-d3e0-4f3a-bcbd-8c683641826f" />
 
-In the project directory, you can run:
+<img width="980" height="516" alt="image" src="https://github.com/user-attachments/assets/79bcc258-1b20-4a9c-b31a-e15ba865700a" />
 
-### `npm start`
+<img width="980" height="516" alt="image" src="https://github.com/user-attachments/assets/c78aad58-6f9d-4a73-8664-a84c244f2527" />
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<img width="980" height="516" alt="image" src="https://github.com/user-attachments/assets/8a0b6cef-2715-45a6-af24-8d0aa1f40ee7" />
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+<img width="980" height="516" alt="image" src="https://github.com/user-attachments/assets/78f6654b-fac3-4490-95cb-40cba5cc99e7" />
 
-### `npm test`
+<img width="980" height="516" alt="image" src="https://github.com/user-attachments/assets/51d9421e-e85b-46e6-8f9f-1005ef2f2621" />
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<img width="980" height="516" alt="image" src="https://github.com/user-attachments/assets/5daa21a5-a3d8-46cd-92e0-6e819ddb750b" />
 
-### `npm run build`
+<img width="980" height="516" alt="image" src="https://github.com/user-attachments/assets/84dfd512-c4cc-4745-bb16-42f7f8117590" />
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<img width="980" height="516" alt="image" src="https://github.com/user-attachments/assets/27b0497a-8160-435d-b320-7bdb0a40a537" />
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
++Giao diện admin:
+<img width="980" height="516" alt="image" src="https://github.com/user-attachments/assets/85c810ce-c909-4a32-93e1-259a53742f3e" />
